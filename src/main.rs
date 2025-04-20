@@ -1,6 +1,6 @@
 use gtk::prelude::*;
-use relm4::factory::FactoryVecDeque;
-// use relm4::factory::positions::GridPosition;
+use relm4::factory::{FactoryVecDeque, Position};
+use relm4::factory::positions::GridPosition;
 use relm4::prelude::*;
 
 #[derive(Debug)]
@@ -26,7 +26,7 @@ impl FactoryComponent for Counter {
     type Input = ();
     type Output = AppMsg;
     type CommandOutput = ();
-    type ParentWidget = gtk::Box;
+    type ParentWidget = gtk::Grid;
 
     view! {
         gtk::Button {
@@ -41,20 +41,20 @@ impl FactoryComponent for Counter {
     fn init_model(value: Self::Init, _index: &DynamicIndex, _sender: FactorySender<Self>) -> Self {
         Self { value }
     }
+}
 
-    // fn position(&self, index: &usize) -> BoxPosition {
-    //     let index = *index as i32;
-
-    //     let row = index / 3;
-    //     let column = index % 3;
-
-    //     BoxPosition {
-    //         column,
-    //         row,
-    //         width: 1,
-    //         height: 1,
-    //     }
-    // }
+impl Position<GridPosition, DynamicIndex> for Counter {
+    fn position(&self, index: &DynamicIndex) -> GridPosition {
+        let index = index.current_index();
+        let x = index / 10;
+        let y = index % 10;
+        GridPosition {
+            column: y as i32,
+            row: x as i32,
+            width: 1,
+            height: 1,
+        }
+    }
 }
 
 #[relm4::component]
@@ -80,10 +80,11 @@ impl SimpleComponent for App {
                 },
 
                 #[local]
-                factory_box -> gtk::Box {
-                    set_orientation: gtk::Orientation::Horizontal,
+                factory_box -> gtk::Grid {
+                    set_orientation: gtk::Orientation::Vertical,
                     set_margin_all: 5,
-                    set_spacing: 5,
+                    set_column_spacing: 15,
+                    set_row_spacing: 15,
                 },
             }
         }
@@ -94,7 +95,7 @@ impl SimpleComponent for App {
         root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let factory_box = gtk::Box::default();
+        let factory_box = gtk::Grid::default();
 
         let counters = FactoryVecDeque::builder()
             .launch(factory_box.clone())
