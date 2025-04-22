@@ -31,16 +31,24 @@ impl SimpleComponent for App {
                     set_tooltip_text: Some("Search for emojis"),
                 },
 
-                gtk::Label {
-                    set_label: "Smile and Faces",
-                },
+                gtk::ScrolledWindow {
+                    set_vexpand: true,
 
-                #[local]
-                smile_grid -> gtk::Grid {
-                    set_orientation: gtk::Orientation::Vertical,
-                    set_margin_all: 5,
-                    set_column_spacing: 15,
-                    set_row_spacing: 15,
+                    gtk::Box {
+                        set_orientation: gtk::Orientation::Vertical,
+
+                        gtk::Label {
+                            set_label: "Smile and Faces",
+                        },
+                        
+                        #[local]
+                        smile_grid -> gtk::Grid {
+                            set_orientation: gtk::Orientation::Vertical,
+                            set_margin_all: 5,
+                            set_column_spacing: 15,
+                            set_row_spacing: 15,
+                        },
+                    }
                 },
             }
         }
