@@ -3,13 +3,13 @@ use relm4::factory::{FactoryVecDeque, Position};
 use relm4::factory::positions::GridPosition;
 use relm4::prelude::*;
 
-struct Emoji {
+struct EmojiButton {
     pub symbol: String,
     pub name: String,
 }
 
 #[relm4::factory]
-impl FactoryComponent for Emoji {
+impl FactoryComponent for EmojiButton {
     type Init = (String, String);
     type Input = ();
     type Output = ();
@@ -32,7 +32,7 @@ impl FactoryComponent for Emoji {
     }
 }
 
-impl Position<GridPosition, DynamicIndex> for Emoji {
+impl Position<GridPosition, DynamicIndex> for EmojiButton {
     fn position(&self, index: &DynamicIndex) -> GridPosition {
         let index = index.current_index();
         let x = index / 10;
@@ -47,7 +47,7 @@ impl Position<GridPosition, DynamicIndex> for Emoji {
 }
 
 struct App {
-    emojis: FactoryVecDeque<Emoji>,
+    emojis: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
 }
 
@@ -73,7 +73,7 @@ impl SimpleComponent for App {
                 },
 
                 #[local]
-                factory_box -> gtk::Grid {
+                simle_emojis -> gtk::Grid {
                     set_orientation: gtk::Orientation::Vertical,
                     set_margin_all: 5,
                     set_column_spacing: 15,
@@ -88,12 +88,14 @@ impl SimpleComponent for App {
         root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let factory_box = gtk::Grid::default();
+        let simle_emojis = gtk::Grid::default();
 
         let emojis = FactoryVecDeque::builder()
-            .launch(factory_box.clone())
+            .launch(simle_emojis.clone())
             .forward(sender.input_sender(), |output| output);
 
+
+            
         let mut model = App {
             emojis,
             entry: gtk::EntryBuffer::default(),
