@@ -20,9 +20,9 @@ impl FactoryComponent for Emoji {
         gtk::Button {
             set_label: &self.symbol,
             set_tooltip: &self.name,
-            connect_clicked => move |_| {
-                println!("You clicked me!");
-            },
+            connect_clicked[symbol = self.symbol.clone()] => move |_| {
+                println!("You clicked {}", symbol);
+            }
         }
     }
 
