@@ -91,6 +91,6 @@ impl SimpleComponent for App {
 }
 
 fn main() {
-    let app = RelmApp::new("relm4.example.entry");
+    let app = RelmApp::new("io.github.falafel.emojipick");
     app.run::<App>(());
 }
