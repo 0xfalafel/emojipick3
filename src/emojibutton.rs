@@ -2,7 +2,9 @@ use gtk::prelude::*;
 use relm4::prelude::*;
 use relm4::factory::Position;
 use relm4::factory::positions::GridPosition;
+use serde::Deserialize;
 
+#[derive(Debug, Deserialize)]
 pub struct EmojiButton {
     pub symbol: String,
     pub name: String,
