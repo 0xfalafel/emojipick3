@@ -31,6 +31,10 @@ impl SimpleComponent for App {
                     set_tooltip_text: Some("Search for emojis"),
                 },
 
+                gtk::Label {
+                    set_label: "Smile and Faces",
+                },
+
                 #[local]
                 smile_grid -> gtk::Grid {
                     set_orientation: gtk::Orientation::Vertical,
