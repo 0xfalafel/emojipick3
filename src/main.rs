@@ -3,21 +3,13 @@ use relm4::factory::{FactoryVecDeque, Position};
 use relm4::factory::positions::GridPosition;
 use relm4::prelude::*;
 
-#[derive(Debug)]
-enum AppMsg {
-    // AddCounters,
-    // Clicked(DynamicIndex),
-}
-
 struct Emoji {
     pub symbol: String,
     pub name: String,
 }
 
 struct App {
-    counters: FactoryVecDeque<Emoji>,
-    created_counters: u8,
-    // stores entered values
+    emojis: FactoryVecDeque<Emoji>,
     entry: gtk::EntryBuffer,
 }
 
@@ -25,7 +17,7 @@ struct App {
 impl FactoryComponent for Emoji {
     type Init = (String, String);
     type Input = ();
-    type Output = AppMsg;
+    type Output = ();
     type CommandOutput = ();
     type ParentWidget = gtk::Grid;
 
@@ -36,7 +28,6 @@ impl FactoryComponent for Emoji {
             set_tooltip: &self.name,
             connect_clicked[index] => move |_| {
                 println!("You clicked me !");
-                // sender.output(AppMsg::Clicked(index.clone())).unwrap();
             },
         }
     }
@@ -64,7 +55,7 @@ impl Position<GridPosition, DynamicIndex> for Emoji {
 #[relm4::component]
 impl SimpleComponent for App {
     type Init = ();
-    type Input = AppMsg;
+    type Input = ();
     type Output = ();
 
     view! {
@@ -79,8 +70,7 @@ impl SimpleComponent for App {
 
                 gtk::Entry {
                     set_buffer: &model.entry,
-                    set_tooltip_text: Some("How many counters shall be added/removed?"),
-                    // connect_activate => AppMsg::AddCounters,
+                    set_tooltip_text: Some("Search for emojis"),
                 },
 
                 #[local]
@@ -101,56 +91,24 @@ impl SimpleComponent for App {
     ) -> ComponentParts<Self> {
         let factory_box = gtk::Grid::default();
 
-        let counters = FactoryVecDeque::builder()
+        let emojis = FactoryVecDeque::builder()
             .launch(factory_box.clone())
             .forward(sender.input_sender(), |output| output);
 
         let mut model = App {
-            counters,
-            created_counters: 0,
+            emojis,
             entry: gtk::EntryBuffer::default(),
         };
 
         // Initialize a counter
         {
-            let mut guard = model.counters.guard();
+            let mut guard = model.emojis.guard();
             guard.push_back(("😄".to_string(), "smile".to_string()));
         }
 
         let widgets = view_output!();
 
         ComponentParts { model, widgets }
-    }
-
-    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
-        match message {
-            // AppMsg::AddCounters => {
-            //     let text = self.entry.text();
-            //     if let Ok(v) = text.parse::<i32>() {
-            //         let mut guard = self.counters.guard();
-            //         if v.is_positive() {
-            //             // add as many counters as user entered
-            //             for _ in 0..v {
-            //                 guard.push_back(self.created_counters);
-            //                 self.created_counters += 1;
-            //             }
-            //         } else if v.is_negative() {
-            //             // remove counters
-            //             for _ in v..0 {
-            //                 guard.pop_front();
-            //             }
-            //         }
-
-            //         // clearing the entry value clears the entry widget
-            //         self.entry.set_text("");
-            //     }
-            // }
-            // AppMsg::Clicked(index) => {
-            //     if let Some(counter) = self.counters.guard().get_mut(index.current_index()) {
-            //         counter.value = counter.value.wrapping_sub(1);
-            //     }
-            // }
-        }
     }
 }
 
