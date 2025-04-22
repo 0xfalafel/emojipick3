@@ -8,11 +8,6 @@ struct Emoji {
     pub name: String,
 }
 
-struct App {
-    emojis: FactoryVecDeque<Emoji>,
-    entry: gtk::EntryBuffer,
-}
-
 #[relm4::factory]
 impl FactoryComponent for Emoji {
     type Init = (String, String);
@@ -23,11 +18,10 @@ impl FactoryComponent for Emoji {
 
     view! {
         gtk::Button {
-            #[watch]
             set_label: &self.symbol,
             set_tooltip: &self.name,
-            connect_clicked[index] => move |_| {
-                println!("You clicked me !");
+            connect_clicked => move |_| {
+                println!("You clicked me!");
             },
         }
     }
@@ -50,6 +44,11 @@ impl Position<GridPosition, DynamicIndex> for Emoji {
             height: 1,
         }
     }
+}
+
+struct App {
+    emojis: FactoryVecDeque<Emoji>,
+    entry: gtk::EntryBuffer,
 }
 
 #[relm4::component]
