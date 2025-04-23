@@ -1,4 +1,5 @@
 use gtk::prelude::*;
+use relm4::gtk::gdk;
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
 
@@ -19,7 +20,7 @@ impl SimpleComponent for App {
     view! {
         gtk::ApplicationWindow {
             set_title: Some("Entry example"),
-            set_default_size: (300, 200),
+            set_default_size: (400, 400),
 
             gtk::Box {
                 set_orientation: gtk::Orientation::Vertical,
@@ -59,6 +60,9 @@ impl SimpleComponent for App {
         root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
+        load_css();
+
+
         let smile_grid = gtk::Grid::default();
 
         let mut emojis_smile = FactoryVecDeque::builder()
@@ -88,6 +92,17 @@ impl SimpleComponent for App {
 
         ComponentParts { model, widgets }
     }
+}
+
+// from https://jamesbenner.hashnode.dev/how-to-style-your-gtk4-rust-app-with-css
+fn load_css() {
+    let display = gdk::Display::default().expect("Could not get default display.");
+    let provider = gtk::CssProvider::new();
+    let priority = gtk::STYLE_PROVIDER_PRIORITY_APPLICATION;
+
+    // load our custom CSS
+    provider.load_from_data(include_str!("../data/style.css"));
+    gtk::style_context_add_provider_for_display(&display, &provider, priority);
 }
 
 fn main() {
