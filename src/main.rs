@@ -1,5 +1,5 @@
 use gtk::prelude::*;
-use relm4::gtk::{gdk, Grid, HeaderBar};
+use relm4::gtk::{gdk, Grid};
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
 
@@ -31,19 +31,11 @@ impl SimpleComponent for App {
             #[wrap(Some)]
             set_titlebar = &gtk::HeaderBar {
 
-                pack_start = &gtk::Label {
+                #[wrap(Some)]
+                set_title_widget = &gtk::Label {
                     set_label: "Hi mom!"
                 },
             },
-            // gtk::HeaderBar {
-            //     // set_title_widget = Some(gtk::Label::new(Some("Hey, a HeaderBar!"))),
-            // },
-
-            // // Set the header bar for this window
-            // set_titlebar = Some(&gtk::HeaderBar::new()) {
-            //     set_show_title_buttons: true,
-            //     set_title_widget = Some(&gtk::Label::new(Some("My App Title"))),
-            // },
 
             gtk::Box {
                 set_orientation: gtk::Orientation::Vertical,
