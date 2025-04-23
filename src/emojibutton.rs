@@ -4,7 +4,7 @@ use relm4::factory::Position;
 use relm4::factory::positions::GridPosition;
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct EmojiButton {
     pub symbol: String,
     pub name: String,

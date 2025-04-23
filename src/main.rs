@@ -1,10 +1,12 @@
 use gtk::prelude::*;
-use relm4::gtk::gdk;
+use relm4::gtk::{gdk, Grid};
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
 
 mod emojibutton;
 use emojibutton::EmojiButton;
+
+const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 
 struct App {
     _emojis: FactoryVecDeque<EmojiButton>,
@@ -58,29 +60,14 @@ impl SimpleComponent for App {
     fn init(
         _init: Self::Init,
         root: Self::Root,
-        sender: ComponentSender<Self>,
+        _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         load_css();
 
 
         let smile_grid = gtk::Grid::default();
 
-        let mut emojis_smile = FactoryVecDeque::builder()
-            .launch(smile_grid.clone())
-            .forward(sender.input_sender(), |output| output);
-
-        const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
-
-        let emojis_smile_list: Vec<EmojiButton> = serde_json::from_str(SMILE_FACES).unwrap();
-
-        // Initialize a counter
-        {
-            let mut guard = emojis_smile.guard();
-
-            for emoji in emojis_smile_list {
-                guard.push_back((emoji.symbol, emoji.name));
-            }
-        }
+        let emojis_smile= initialize_emoji_grid(SMILE_FACES, &smile_grid);
 
             
         let model = App {
@@ -94,7 +81,27 @@ impl SimpleComponent for App {
     }
 }
 
-// from https://jamesbenner.hashnode.dev/how-to-style-your-gtk4-rust-app-with-css
+/// Initialize a grid of emojis from a json containing the emojis
+fn initialize_emoji_grid(json_emojis: &str, grid: &Grid) -> FactoryVecDeque<EmojiButton> {
+    let mut emojis_smile: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
+        .launch(grid.clone())
+        .detach();
+
+    let emojis_smile_list: Vec<EmojiButton> = serde_json::from_str(json_emojis).unwrap();
+
+    // Use the Factory to create all the emoji buttons
+    {
+        let mut guard = emojis_smile.guard();
+
+        for emoji in emojis_smile_list {
+            guard.push_back((emoji.symbol, emoji.name));
+        }
+    }
+
+    emojis_smile
+}
+
+/// from https://jamesbenner.hashnode.dev/how-to-style-your-gtk4-rust-app-with-css
 fn load_css() {
     let display = gdk::Display::default().expect("Could not get default display.");
     let provider = gtk::CssProvider::new();
