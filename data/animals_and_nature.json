@@ -1,0 +1,438 @@
+[
+    {
+        "symbol": "🐶",
+        "name": "dog"
+    },
+    {
+        "symbol": "🐺",
+        "name": "wolf"
+    },
+    {
+        "symbol": "🦊",
+        "name": "fox"
+    },
+    {
+        "symbol": "🦝",
+        "name": "raccoon"
+    },
+    {
+        "symbol": "🐱",
+        "name": "cat"
+    },
+    {
+        "symbol": "🦁",
+        "name": "lion"
+    },
+    {
+        "symbol": "🐯",
+        "name": "tiger face"
+    },
+    {
+        "symbol": "🐅",
+        "name": "tiger"
+    },
+    {
+        "symbol": "🐆",
+        "name": "leopard"
+    },
+    {
+        "symbol": "🐴",
+        "name": "horse face"
+    },
+    {
+        "symbol": "🦄",
+        "name": "unicorn"
+    },
+    {
+        "symbol": "🦓",
+        "name": "zebra"
+    },
+    {
+        "symbol": "🦌",
+        "name": "deer"
+    },
+    {
+        "symbol": "🐮",
+        "name": "cow face"
+    },
+    {
+        "symbol": "🐷",
+        "name": "pig face"
+    },
+    {
+        "symbol": "🐖",
+        "name": "pig"
+    },
+    {
+        "symbol": "🐗",
+        "name": "boar"
+    },
+    {
+        "symbol": "🐷",
+        "name": "pig nose"
+    },
+    {
+        "symbol": "🐏",
+        "name": "ram"
+    },
+    {
+        "symbol": "🐑",
+        "name": "ewe"
+    },
+    {
+        "symbol": "🐐",
+        "name": "goat"
+    },
+    {
+        "symbol": "🐪",
+        "name": "camel"
+    },
+    {
+        "symbol": "🐫",
+        "name": "two-hump camel"
+    },
+    {
+        "symbol": "🦙",
+        "name": "llama"
+    },
+    {
+        "symbol": "🦒",
+        "name": "giraffe"
+    },
+    {
+        "symbol": "🐘",
+        "name": "elephant"
+    },
+    {
+        "symbol": "🦏",
+        "name": "rhinoceros"
+    },
+    {
+        "symbol": "🦛",
+        "name": "hippopotamus"
+    },
+    {
+        "symbol": "🐭",
+        "name": "mouse face"
+    },
+    {
+        "symbol": "🐁",
+        "name": "mouse"
+    },
+    {
+        "symbol": "🐀",
+        "name": "rat"
+    },
+    {
+        "symbol": "🐹",
+        "name": "hamster"
+    },
+    {
+        "symbol": "🐰",
+        "name": "rabbit face"
+    },
+    {
+        "symbol": "🐇",
+        "name": "rabbit"
+    },
+    {
+        "symbol": "🐿",
+        "name": "chipmunk"
+    },
+    {
+        "symbol": "🦔",
+        "name": "hedgehog"
+    },
+    {
+        "symbol": "🦇",
+        "name": "bat"
+    },
+    {
+        "symbol": "🐻",
+        "name": "bear"
+    },
+    {
+        "symbol": "🐨",
+        "name": "koala"
+    },
+    {
+        "symbol": "🐼",
+        "name": "panda"
+    },
+    {
+        "symbol": "🦘",
+        "name": "kangaroo"
+    },
+    {
+        "symbol": "🦡",
+        "name": "badger"
+    },
+    {
+        "symbol": "🐾",
+        "name": "paw prints"
+    },
+    {
+        "symbol": "🦃",
+        "name": "turkey"
+    },
+    {
+        "symbol": "🐔",
+        "name": "chicken"
+    },
+    {
+        "symbol": "🐓",
+        "name": "rooster"
+    },
+    {
+        "symbol": "🐣",
+        "name": "hatching chick"
+    },
+    {
+        "symbol": "🐤",
+        "name": "baby chick"
+    },
+    {
+        "symbol": "🐥",
+        "name": "front-facing baby chick"
+    },
+    {
+        "symbol": "🐦",
+        "name": "bird"
+    },
+    {
+        "symbol": "🐧",
+        "name": "penguin"
+    },
+    {
+        "symbol": "🕊",
+        "name": "dove"
+    },
+    {
+        "symbol": "🦅",
+        "name": "eagle"
+    },
+    {
+        "symbol": "🦆",
+        "name": "duck"
+    },
+    {
+        "symbol": "🦢",
+        "name": "swan"
+    },
+    {
+        "symbol": "🦉",
+        "name": "owl"
+    },
+    {
+        "symbol": "🦚",
+        "name": "peacock"
+    },
+    {
+        "symbol": "🦜",
+        "name": "parrot"
+    },
+    {
+        "symbol": "🐸",
+        "name": "frog"
+    },
+    {
+        "symbol": "🐊",
+        "name": "crocodile"
+    },
+    {
+        "symbol": "🐢",
+        "name": "turtle"
+    },
+    {
+        "symbol": "🦎",
+        "name": "lizard"
+    },
+    {
+        "symbol": "🐍",
+        "name": "snake"
+    },
+    {
+        "symbol": "🐲",
+        "name": "dragon face"
+    },
+    {
+        "symbol": "🐉",
+        "name": "dragon"
+    },
+    {
+        "symbol": "🦕",
+        "name": "sauropod"
+    },
+    {
+        "symbol": "🦖",
+        "name": "T-Rex"
+    },
+    {
+        "symbol": "🐳",
+        "name": "spouting whale"
+    },
+    {
+        "symbol": "🐋",
+        "name": "whale"
+    },
+    {
+        "symbol": "🐬",
+        "name": "dolphin"
+    },
+    {
+        "symbol": "🐟",
+        "name": "fish"
+    },
+    {
+        "symbol": "🐠",
+        "name": "tropical fish"
+    },
+    {
+        "symbol": "🐡",
+        "name": "blowfish"
+    },
+    {
+        "symbol": "🦈",
+        "name": "shark"
+    },
+    {
+        "symbol": "🐙",
+        "name": "octopus"
+    },
+    {
+        "symbol": "🐚",
+        "name": "spiral shell"
+    },
+    {
+        "symbol": "🐌",
+        "name": "snail"
+    },
+    {
+        "symbol": "🦋",
+        "name": "butterfly"
+    },
+    {
+        "symbol": "🐛",
+        "name": "bug"
+    },
+    {
+        "symbol": "🐜",
+        "name": "ant"
+    },
+    {
+        "symbol": "🐝",
+        "name": "honeybee"
+    },
+    {
+        "symbol": "🐞",
+        "name": "lady beetle"
+    },
+    {
+        "symbol": "🦗",
+        "name": "cricket"
+    },
+    {
+        "symbol": "🕷",
+        "name": "spider"
+    },
+    {
+        "symbol": "🕸",
+        "name": "spider web"
+    },
+    {
+        "symbol": "🦂",
+        "name": "scorpion"
+    },
+    {
+        "symbol": "🦟",
+        "name": "mosquito"
+    },
+    {
+        "symbol": "🦠",
+        "name": "microbe"
+    },
+    {
+        "symbol": "🌸",
+        "name": "cherry blossom"
+    },
+    {
+        "symbol": "💮",
+        "name": "white flower"
+    },
+    {
+        "symbol": "🏵",
+        "name": "rosette"
+    },
+    {
+        "symbol": "🌹",
+        "name": "rose"
+    },
+    {
+        "symbol": "🥀",
+        "name": "wilted flower"
+    },
+    {
+        "symbol": "🌺",
+        "name": "hibiscus"
+    },
+    {
+        "symbol": "🌻",
+        "name": "sunflower"
+    },
+    {
+        "symbol": "🌼",
+        "name": "blossom"
+    },
+    {
+        "symbol": "🌷",
+        "name": "tulip"
+    },
+    {
+        "symbol": "🌱",
+        "name": "seedling"
+    },
+    {
+        "symbol": "🌲",
+        "name": "evergreen tree"
+    },
+    {
+        "symbol": "🌳",
+        "name": "deciduous tree"
+    },
+    {
+        "symbol": "🌴",
+        "name": "palm tree"
+    },
+    {
+        "symbol": "🌵",
+        "name": "cactus"
+    },
+    {
+        "symbol": "🌾",
+        "name": "sheaf of rice"
+    },
+    {
+        "symbol": "🌿",
+        "name": "herb"
+    },
+    {
+        "symbol": "☘",
+        "name": "shamrock"
+    },
+    {
+        "symbol": "🍀",
+        "name": "four leaf clover"
+    },
+    {
+        "symbol": "🍁",
+        "name": "maple leaf"
+    },
+    {
+        "symbol": "🍂",
+        "name": "fallen leaf"
+    },
+    {
+        "symbol": "🍃",
+        "name": "leaf fluttering in wind"
+    }
+]

@@ -1,0 +1,406 @@
+[
+    {
+        "symbol": "🍓",
+        "name": "strawberry"
+    },
+    {
+        "symbol": "🍇",
+        "name": "grapes"
+    },
+    {
+        "symbol": "🍈",
+        "name": "melon"
+    },
+    {
+        "symbol": "🍉",
+        "name": "watermelon"
+    },
+    {
+        "symbol": "🍊",
+        "name": "tangerine"
+    },
+    {
+        "symbol": "🍋",
+        "name": "lemon"
+    },
+    {
+        "symbol": "🍌",
+        "name": "banana"
+    },
+    {
+        "symbol": "🍍",
+        "name": "pineapple"
+    },
+    {
+        "symbol": "🥭",
+        "name": "mango"
+    },
+    {
+        "symbol": "🍎",
+        "name": "red apple"
+    },
+    {
+        "symbol": "🍏",
+        "name": "green apple"
+    },
+    {
+        "symbol": "🍐",
+        "name": "pear"
+    },
+    {
+        "symbol": "🍑",
+        "name": "peach"
+    },
+    {
+        "symbol": "🍒",
+        "name": "cherries"
+    },
+    {
+        "symbol": "🥝",
+        "name": "kiwi fruit"
+    },
+    {
+        "symbol": "🍅",
+        "name": "tomato"
+    },
+    {
+        "symbol": "🥥",
+        "name": "coconut"
+    },
+    {
+        "symbol": "🥑",
+        "name": "avocado"
+    },
+    {
+        "symbol": "🍆",
+        "name": "eggplant"
+    },
+    {
+        "symbol": "🥔",
+        "name": "potato"
+    },
+    {
+        "symbol": "🥕",
+        "name": "carrot"
+    },
+    {
+        "symbol": "🌽",
+        "name": "ear of corn"
+    },
+    {
+        "symbol": "🌶",
+        "name": "hot pepper"
+    },
+    {
+        "symbol": "🥒",
+        "name": "cucumber"
+    },
+    {
+        "symbol": "🥬",
+        "name": "leafy green"
+    },
+    {
+        "symbol": "🥦",
+        "name": "broccoli"
+    },
+    {
+        "symbol": "🍄",
+        "name": "mushroom"
+    },
+    {
+        "symbol": "🥜",
+        "name": "peanuts"
+    },
+    {
+        "symbol": "🌰",
+        "name": "chestnut"
+    },
+    {
+        "symbol": "🍞",
+        "name": "bread"
+    },
+    {
+        "symbol": "🥐",
+        "name": "croissant"
+    },
+    {
+        "symbol": "🥖",
+        "name": "baguette bread"
+    },
+    {
+        "symbol": "🥨",
+        "name": "pretzel"
+    },
+    {
+        "symbol": "🥯",
+        "name": "bagel"
+    },
+    {
+        "symbol": "🥞",
+        "name": "pancakes"
+    },
+    {
+        "symbol": "🧀",
+        "name": "cheese wedge"
+    },
+    {
+        "symbol": "🍖",
+        "name": "meat on bone"
+    },
+    {
+        "symbol": "🍗",
+        "name": "poultry leg"
+    },
+    {
+        "symbol": "🥩",
+        "name": "cut of meat"
+    },
+    {
+        "symbol": "🥓",
+        "name": "bacon"
+    },
+    {
+        "symbol": "🍔",
+        "name": "hamburger"
+    },
+    {
+        "symbol": "🍟",
+        "name": "french fries"
+    },
+    {
+        "symbol": "🍕",
+        "name": "pizza"
+    },
+    {
+        "symbol": "🌭",
+        "name": "hot dog"
+    },
+    {
+        "symbol": "🥪",
+        "name": "sandwich"
+    },
+    {
+        "symbol": "🌮",
+        "name": "taco"
+    },
+    {
+        "symbol": "🌯",
+        "name": "burrito"
+    },
+    {
+        "symbol": "🥙",
+        "name": "stuffed flatbread"
+    },
+    {
+        "symbol": "🥚",
+        "name": "egg"
+    },
+    {
+        "symbol": "🍳",
+        "name": "cooking"
+    },
+    {
+        "symbol": "🥘",
+        "name": "shallow pan of food"
+    },
+    {
+        "symbol": "🍲",
+        "name": "pot of food"
+    },
+    {
+        "symbol": "🥣",
+        "name": "bowl with spoon"
+    },
+    {
+        "symbol": "🥗",
+        "name": "green salad"
+    },
+    {
+        "symbol": "🍿",
+        "name": "popcorn"
+    },
+    {
+        "symbol": "🧂",
+        "name": "salt"
+    },
+    {
+        "symbol": "🥫",
+        "name": "canned food"
+    },
+    {
+        "symbol": "🍱",
+        "name": "bento box"
+    },
+    {
+        "symbol": "🍘",
+        "name": "rice cracker"
+    },
+    {
+        "symbol": "🍙",
+        "name": "rice ball"
+    },
+    {
+        "symbol": "🍚",
+        "name": "cooked rice"
+    },
+    {
+        "symbol": "🍛",
+        "name": "curry rice"
+    },
+    {
+        "symbol": "🍜",
+        "name": "steaming bowl"
+    },
+    {
+        "symbol": "🍝",
+        "name": "spaghetti"
+    },
+    {
+        "symbol": "🍠",
+        "name": "roasted sweet potato"
+    },
+    {
+        "symbol": "🍢",
+        "name": "oden"
+    },
+    {
+        "symbol": "🍣",
+        "name": "sushi"
+    },
+    {
+        "symbol": "🍤",
+        "name": "fried shrimp"
+    },
+    {
+        "symbol": "🍥",
+        "name": "fish cake with swirl"
+    },
+    {
+        "symbol": "🥮",
+        "name": "moon cake"
+    },
+    {
+        "symbol": "🍡",
+        "name": "dango"
+    },
+    {
+        "symbol": "🥟",
+        "name": "dumpling"
+    },
+    {
+        "symbol": "🥠",
+        "name": "fortune cookie"
+    },
+    {
+        "symbol": "🥡",
+        "name": "takeout box"
+    },
+    {
+        "symbol": "🦀",
+        "name": "crab"
+    },
+    {
+        "symbol": "🦞",
+        "name": "lobster"
+    },
+    {
+        "symbol": "🦐",
+        "name": "shrimp"
+    },
+    {
+        "symbol": "🦑",
+        "name": "squid"
+    },
+    {
+        "symbol": "🍦",
+        "name": "soft ice cream"
+    },
+    {
+        "symbol": "🍧",
+        "name": "shaved ice"
+    },
+    {
+        "symbol": "🍨",
+        "name": "ice cream"
+    },
+    {
+        "symbol": "🍩",
+        "name": "doughnut"
+    },
+    {
+        "symbol": "🍪",
+        "name": "cookie"
+    },
+    {
+        "symbol": "🎂",
+        "name": "birthday cake"
+    },
+    {
+        "symbol": "🍰",
+        "name": "shortcake"
+    },
+    {
+        "symbol": "🧁",
+        "name": "cupcake"
+    },
+    {
+        "symbol": "🥧",
+        "name": "pie"
+    },
+    {
+        "symbol": "🍫",
+        "name": "chocolate bar"
+    },
+    {
+        "symbol": "🍬",
+        "name": "candy"
+    },
+    {
+        "symbol": "🍭",
+        "name": "lollipop"
+    },
+    {
+        "symbol": "🍮",
+        "name": "custard"
+    },
+    {
+        "symbol": "🍯",
+        "name": "honey pot"
+    },
+    {
+        "symbol": "🍼",
+        "name": "baby bottle"
+    },
+    {
+        "symbol": "🥛",
+        "name": "glass of milk"
+    },
+    {
+        "symbol": "☕",
+        "name": "hot beverage"
+    },
+    {
+        "symbol": "🍵",
+        "name": "teacup without handle"
+    },
+    {
+        "symbol": "🍶",
+        "name": "sake"
+    },
+    {
+        "symbol": "🍾",
+        "name": "bottle with popping cork"
+    },
+    {
+        "symbol": "🍷",
+        "name": "wine glass"
+    },
+    {
+        "symbol": "🍸",
+        "name": "cocktail glass"
+    },
+    {
+        "symbol": "🍹",
+        "name": "tropical drink"
+    }
+]
