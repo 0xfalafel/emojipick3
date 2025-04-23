@@ -20,7 +20,7 @@ impl SimpleComponent for App {
     view! {
         gtk::ApplicationWindow {
             set_title: Some("Entry example"),
-            set_default_size: (400, 400),
+            set_default_size: (477, 400),
 
             gtk::Box {
                 set_orientation: gtk::Orientation::Vertical,
