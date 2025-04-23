@@ -32,8 +32,9 @@ impl SimpleComponent for App {
             set_titlebar = &gtk::HeaderBar {
 
                 #[wrap(Some)]
-                set_title_widget = &gtk::Label {
-                    set_label: "Hi mom!"
+                set_title_widget = &gtk::Entry {
+                    set_buffer: &model.entry,
+                    set_tooltip_text: Some("Search for emojis"),
                 },
             },
 
@@ -41,11 +42,6 @@ impl SimpleComponent for App {
                 set_orientation: gtk::Orientation::Vertical,
                 set_margin_all: 5,
                 set_spacing: 5,
-
-                gtk::Entry {
-                    set_buffer: &model.entry,
-                    set_tooltip_text: Some("Search for emojis"),
-                },
 
                 gtk::ScrolledWindow {
                     set_vexpand: true,
