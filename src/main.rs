@@ -8,10 +8,12 @@ use emojibutton::EmojiButton;
 
 const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
+const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
 
 struct App {
     _emojis_smiles: FactoryVecDeque<EmojiButton>,
     _emojis_food: FactoryVecDeque<EmojiButton>,
+    _emojis_animals: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
 }
 
@@ -63,6 +65,17 @@ impl SimpleComponent for App {
                             set_column_spacing: 15,
                             set_row_spacing: 15,
                         },
+
+                        // Animals and Nature
+                        gtk::Label::new(Some("Animals and Nature")),
+                        
+                        #[local]
+                        animals_grid -> gtk::Grid {
+                            set_orientation: gtk::Orientation::Vertical,
+                            set_margin_all: 5,
+                            set_column_spacing: 15,
+                            set_row_spacing: 15,
+                        },
                     }
                 },
             }
@@ -82,11 +95,14 @@ impl SimpleComponent for App {
         let food_grid = gtk::Grid::default();
         let emojis_food= initialize_emoji_grid(FOOD_DRINK, &food_grid);
 
+        let animals_grid = gtk::Grid::default();
+        let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid);
 
             
         let model = App {
             _emojis_smiles: emojis_smile,
             _emojis_food: emojis_food,
+            _emojis_animals: emojis_animals,
             entry: gtk::EntryBuffer::default(),
         };
 
