@@ -64,11 +64,10 @@ impl SimpleComponent for App {
     ) -> ComponentParts<Self> {
         load_css();
 
-
         let smile_grid = gtk::Grid::default();
-
         let emojis_smile= initialize_emoji_grid(SMILE_FACES, &smile_grid);
 
+        
             
         let model = App {
             _emojis: emojis_smile,
@@ -83,22 +82,22 @@ impl SimpleComponent for App {
 
 /// Initialize a grid of emojis from a json containing the emojis
 fn initialize_emoji_grid(json_emojis: &str, grid: &Grid) -> FactoryVecDeque<EmojiButton> {
-    let mut emojis_smile: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
+    let mut emoji_buttons: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
         .launch(grid.clone())
         .detach();
 
-    let emojis_smile_list: Vec<EmojiButton> = serde_json::from_str(json_emojis).unwrap();
+    let emojis_list: Vec<EmojiButton> = serde_json::from_str(json_emojis).unwrap();
 
     // Use the Factory to create all the emoji buttons
     {
-        let mut guard = emojis_smile.guard();
+        let mut guard = emoji_buttons.guard();
 
-        for emoji in emojis_smile_list {
+        for emoji in emojis_list {
             guard.push_back((emoji.symbol, emoji.name));
         }
     }
 
-    emojis_smile
+    emoji_buttons
 }
 
 /// from https://jamesbenner.hashnode.dev/how-to-style-your-gtk4-rust-app-with-css
