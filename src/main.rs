@@ -7,9 +7,11 @@ mod emojibutton;
 use emojibutton::EmojiButton;
 
 const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
+const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
 
 struct App {
-    _emojis: FactoryVecDeque<EmojiButton>,
+    _emojis_smiles: FactoryVecDeque<EmojiButton>,
+    _emojis_food: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
 }
 
@@ -40,12 +42,22 @@ impl SimpleComponent for App {
                     gtk::Box {
                         set_orientation: gtk::Orientation::Vertical,
 
-                        gtk::Label {
-                            set_label: "Smile and Faces",
-                        },
+                        // Smile and Faces
+                        gtk::Label::new(Some("Smile and Faces")),
                         
                         #[local]
                         smile_grid -> gtk::Grid {
+                            set_orientation: gtk::Orientation::Vertical,
+                            set_margin_all: 5,
+                            set_column_spacing: 15,
+                            set_row_spacing: 15,
+                        },
+
+                        // Food and Drinks
+                        gtk::Label::new(Some("Food and Drinks")),
+                        
+                        #[local]
+                        food_grid -> gtk::Grid {
                             set_orientation: gtk::Orientation::Vertical,
                             set_margin_all: 5,
                             set_column_spacing: 15,
@@ -67,10 +79,14 @@ impl SimpleComponent for App {
         let smile_grid = gtk::Grid::default();
         let emojis_smile= initialize_emoji_grid(SMILE_FACES, &smile_grid);
 
-        
+        let food_grid = gtk::Grid::default();
+        let emojis_food= initialize_emoji_grid(FOOD_DRINK, &food_grid);
+
+
             
         let model = App {
-            _emojis: emojis_smile,
+            _emojis_smiles: emojis_smile,
+            _emojis_food: emojis_food,
             entry: gtk::EntryBuffer::default(),
         };
 
