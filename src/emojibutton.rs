@@ -37,8 +37,8 @@ impl FactoryComponent for EmojiButton {
 impl Position<GridPosition, DynamicIndex> for EmojiButton {
     fn position(&self, index: &DynamicIndex) -> GridPosition {
         let index = index.current_index();
-        let x = index / 10;
-        let y = index % 10;
+        let x = index / 8;
+        let y = index % 8;
         GridPosition {
             column: y as i32,
             row: x as i32,
