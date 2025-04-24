@@ -162,10 +162,13 @@ impl SimpleComponent for App {
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>) {
+    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
         match message {
             Msg::SearchedText(search) => {
-                println!("Searched {}", search);
+                match search.len() {
+                    0 => self.stack.set_visible_child_name("emoji_list"),
+                    _ => self.stack.set_visible_child_name("search_results"),
+                }
             }
         }
     }
