@@ -174,10 +174,9 @@ impl Component for App {
                 }
             },
             Msg::Clicked(symbol, _name) => {
-                println!("Root type: {:?}", root.widget_name());
-                println!("plop");
-                root.set_visible(false);
+                root.hide();
                 println!("You clicked {}", symbol);
+                relm4::main_application().quit();
             },
         }
     }
