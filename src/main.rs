@@ -29,28 +29,34 @@ impl SimpleComponent for App {
             set_default_size: (477, 400),
 
             #[wrap(Some)]
-            set_titlebar = &gtk::HeaderBar {
-
-                #[wrap(Some)]
-                set_title_widget = &gtk::Entry {
-                    set_buffer: &model.entry,
-                    set_tooltip_text: Some("Search for emojis"),
-
-                    // focus the searchbar when launching the app
-                    // connect_realize => move |entry| {
-                    //     entry.grab_focus();
-                    // },
-
-                    connect_changed => move |entry| {
-                        println!("{}", entry.text().to_string());
-                    },
-                },
-            },
+            set_titlebar = &gtk::Grid::new(),
 
             gtk::Box {
                 set_orientation: gtk::Orientation::Vertical,
                 set_margin_all: 5,
                 set_spacing: 5,
+
+                gtk::HeaderBar {
+                    set_show_title_buttons: false,
+                    pack_start = &gtk::WindowControls{},
+                    add_css_class: "flat",
+
+                    #[wrap(Some)]
+                    set_title_widget = &gtk::Entry {
+                        set_buffer: &model.entry,
+                        set_tooltip_text: Some("Search for emojis"),
+    
+                        // focus the searchbar when launching the app
+                        // connect_realize => move |entry| {
+                        //     entry.grab_focus();
+                        // },
+    
+                        connect_changed => move |entry| {
+                            println!("{}", entry.text().to_string());
+                        },
+                    },
+                },
+
 
                 gtk::ScrolledWindow {
                     set_vexpand: true,
