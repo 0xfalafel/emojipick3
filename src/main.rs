@@ -11,8 +11,9 @@ const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
 const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
 
 #[derive(Debug)]
-enum Msg {
+pub enum Msg {
     SearchedText(String),
+    Clicked(String, String),
 }
 
 struct App {
@@ -31,7 +32,6 @@ impl SimpleComponent for App {
 
     view! {
         gtk::ApplicationWindow {
-            // set_title: Some("Entry example"),
             set_default_size: (493, 400),
             set_resizable: false,
 
@@ -169,7 +169,10 @@ impl SimpleComponent for App {
                     0 => self.stack.set_visible_child_name("emoji_list"),
                     _ => self.stack.set_visible_child_name("search_results"),
                 }
-            }
+            },
+            Msg::Clicked(symbol, _name) => {
+                println!("You clicked {}", symbol);
+            },
         }
     }
 }

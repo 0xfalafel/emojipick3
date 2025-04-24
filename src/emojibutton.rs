@@ -4,6 +4,8 @@ use relm4::factory::Position;
 use relm4::factory::positions::GridPosition;
 use serde::Deserialize;
 
+use crate::Msg;
+
 #[derive(Debug, Deserialize, Clone)]
 pub struct EmojiButton {
     pub symbol: String,
@@ -13,7 +15,7 @@ pub struct EmojiButton {
 #[relm4::factory(pub)]
 impl FactoryComponent for EmojiButton {
     type Init = (String, String);
-    type Input = ();
+    type Input = Msg;
     type Output = ();
     type CommandOutput = ();
     type ParentWidget = gtk::Grid;
@@ -24,7 +26,14 @@ impl FactoryComponent for EmojiButton {
             set_tooltip: &self.name,
             connect_clicked[symbol = self.symbol.clone()] => move |_| {
                 println!("You clicked {}", symbol);
-            }
+            },
+
+            connect_clicked[sender, emoji = self.clone()] => move |_| {
+                sender.input(Msg::Clicked(emoji.symbol.to_owned(), emoji.name.to_owned()))
+            },
+            // connect_clicked[symbol = self.symbol.clone()] => move |_| {
+            //     println!("You clicked {}", symbol);
+            // }
         }
     }
 
