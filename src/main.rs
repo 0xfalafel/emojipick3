@@ -36,6 +36,11 @@ impl SimpleComponent for App {
                     set_buffer: &model.entry,
                     set_tooltip_text: Some("Search for emojis"),
 
+                    // focus the searchbar when launching the app
+                    // connect_realize => move |entry| {
+                    //     entry.grab_focus();
+                    // },
+
                     connect_changed => move |entry| {
                         println!("{}", entry.text().to_string());
                     },
