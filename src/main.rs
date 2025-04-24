@@ -31,71 +31,74 @@ impl SimpleComponent for App {
             #[wrap(Some)]
             set_titlebar = &gtk::Grid::new(),
 
-            gtk::Box {
-                set_orientation: gtk::Orientation::Vertical,
-                set_margin_all: 5,
-                set_spacing: 5,
+            gtk::WindowHandle {
 
-                gtk::HeaderBar {
-                    set_show_title_buttons: false,
-                    pack_start = &gtk::WindowControls{},
-                    add_css_class: "flat",
-
-                    #[wrap(Some)]
-                    set_title_widget = &gtk::Entry {
-                        set_buffer: &model.entry,
-                        set_tooltip_text: Some("Search for emojis"),
-    
-                        // focus the searchbar when launching the app
+                gtk::Box {
+                    set_orientation: gtk::Orientation::Vertical,
+                    set_margin_all: 5,
+                    set_spacing: 5,
+                    
+                    gtk::HeaderBar {
+                        set_show_title_buttons: false,
+                        pack_start = &gtk::WindowControls{},
+                        add_css_class: "flat",
+                        
+                        #[wrap(Some)]
+                        set_title_widget = &gtk::Entry {
+                            set_buffer: &model.entry,
+                            set_tooltip_text: Some("Search for emojis"),
+                            
+                            // focus the searchbar when launching the app
                         // connect_realize => move |entry| {
-                        //     entry.grab_focus();
-                        // },
-    
-                        connect_changed => move |entry| {
-                            println!("{}", entry.text().to_string());
+                            //     entry.grab_focus();
+                            // },
+                            
+                            connect_changed => move |entry| {
+                                println!("{}", entry.text().to_string());
+                            },
                         },
                     },
-                },
-
-
-                gtk::ScrolledWindow {
-                    set_vexpand: true,
-
-                    gtk::Box {
-                        set_orientation: gtk::Orientation::Vertical,
-
-                        // Smile and Faces
-                        gtk::Label::new(Some("Smile and Faces")),
+                    
+                    
+                    gtk::ScrolledWindow {
+                        set_vexpand: true,
                         
-                        #[local]
-                        smile_grid -> gtk::Grid {
+                        gtk::Box {
                             set_orientation: gtk::Orientation::Vertical,
-                            set_margin_all: 5,
-                            set_column_spacing: 15,
-                            set_row_spacing: 15,
-                        },
-
-                        // Food and Drinks
-                        gtk::Label::new(Some("Food and Drinks")),
-                        
-                        #[local]
-                        food_grid -> gtk::Grid {
-                            set_orientation: gtk::Orientation::Vertical,
-                            set_margin_all: 5,
-                            set_column_spacing: 15,
-                            set_row_spacing: 15,
-                        },
-
-                        // Animals and Nature
-                        gtk::Label::new(Some("Animals and Nature")),
-                        
-                        #[local]
-                        animals_grid -> gtk::Grid {
-                            set_orientation: gtk::Orientation::Vertical,
-                            set_margin_all: 5,
-                            set_column_spacing: 15,
-                            set_row_spacing: 15,
-                        },
+                            
+                            // Smile and Faces
+                            gtk::Label::new(Some("Smile and Faces")),
+                            
+                            #[local]
+                            smile_grid -> gtk::Grid {
+                                set_orientation: gtk::Orientation::Vertical,
+                                set_margin_all: 5,
+                                set_column_spacing: 15,
+                                set_row_spacing: 15,
+                            },
+                            
+                            // Food and Drinks
+                            gtk::Label::new(Some("Food and Drinks")),
+                            
+                            #[local]
+                            food_grid -> gtk::Grid {
+                                set_orientation: gtk::Orientation::Vertical,
+                                set_margin_all: 5,
+                                set_column_spacing: 15,
+                                set_row_spacing: 15,
+                            },
+                            
+                            // Animals and Nature
+                            gtk::Label::new(Some("Animals and Nature")),
+                            
+                            #[local]
+                            animals_grid -> gtk::Grid {
+                                set_orientation: gtk::Orientation::Vertical,
+                                set_margin_all: 5,
+                                set_column_spacing: 15,
+                                set_row_spacing: 15,
+                            },
+                        }
                     }
                 },
             }
