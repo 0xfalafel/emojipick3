@@ -15,8 +15,8 @@ pub struct EmojiButton {
 #[relm4::factory(pub)]
 impl FactoryComponent for EmojiButton {
     type Init = (String, String);
-    type Input = Msg;
-    type Output = ();
+    type Input = ();
+    type Output = Msg;
     type CommandOutput = ();
     type ParentWidget = gtk::Grid;
 
@@ -24,16 +24,12 @@ impl FactoryComponent for EmojiButton {
         gtk::Button {
             set_label: &self.symbol,
             set_tooltip: &self.name,
-            connect_clicked[symbol = self.symbol.clone()] => move |_| {
-                println!("You clicked {}", symbol);
-            },
 
             connect_clicked[sender, emoji = self.clone()] => move |_| {
-                sender.input(Msg::Clicked(emoji.symbol.to_owned(), emoji.name.to_owned()))
+                if let Err(e) = sender.output(Msg::Clicked(emoji.symbol.clone(), emoji.name.clone())) {
+                    eprintln!("Failed to send message from EmojiButton: {:?}", e);
+                }
             },
-            // connect_clicked[symbol = self.symbol.clone()] => move |_| {
-            //     println!("You clicked {}", symbol);
-            // }
         }
     }
 

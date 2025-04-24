@@ -25,12 +25,15 @@ struct App {
 }
 
 #[relm4::component]
-impl SimpleComponent for App {
+impl Component for App {
     type Init = ();
     type Input = Msg;
     type Output = ();
+    type CommandOutput = ();
+    type Widgets = AppWidgets;
 
     view! {
+        #[root]
         gtk::ApplicationWindow {
             set_default_size: (493, 400),
             set_resizable: false,
@@ -138,13 +141,13 @@ impl SimpleComponent for App {
         load_css();
 
         let smile_grid = gtk::Grid::default();
-        let emojis_smile= initialize_emoji_grid(SMILE_FACES, &smile_grid);
+        let emojis_smile= initialize_emoji_grid(SMILE_FACES, &smile_grid, sender.clone());
 
         let food_grid = gtk::Grid::default();
-        let emojis_food= initialize_emoji_grid(FOOD_DRINK, &food_grid);
+        let emojis_food= initialize_emoji_grid(FOOD_DRINK, &food_grid, sender.clone());
 
         let animals_grid = gtk::Grid::default();
-        let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid);
+        let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid, sender.clone());
 
         
         let mut model = App {
@@ -162,7 +165,7 @@ impl SimpleComponent for App {
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
+    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>, root: &Self::Root) {
         match message {
             Msg::SearchedText(search) => {
                 match search.len() {
@@ -171,6 +174,9 @@ impl SimpleComponent for App {
                 }
             },
             Msg::Clicked(symbol, _name) => {
+                println!("Root type: {:?}", root.widget_name());
+                println!("plop");
+                root.set_visible(false);
                 println!("You clicked {}", symbol);
             },
         }
@@ -178,10 +184,14 @@ impl SimpleComponent for App {
 }
 
 /// Initialize a grid of emojis from a json containing the emojis
-fn initialize_emoji_grid(json_emojis: &str, grid: &Grid) -> FactoryVecDeque<EmojiButton> {
+fn initialize_emoji_grid(json_emojis: &str, grid: &Grid, sender: ComponentSender<App>) -> FactoryVecDeque<EmojiButton> {
     let mut emoji_buttons: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
         .launch(grid.clone())
-        .detach();
+        .forward(sender.input_sender(), |msg| match msg {
+            Msg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
+            _ => todo!()
+        });
+
 
     let emojis_list: Vec<EmojiButton> = serde_json::from_str(json_emojis).unwrap();
 
