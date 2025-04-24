@@ -41,7 +41,8 @@ impl SimpleComponent for App {
                     
                     gtk::HeaderBar {
                         set_show_title_buttons: false,
-                        pack_start = &gtk::WindowControls{},
+                        pack_start = &gtk::WindowControls::new(gtk::PackType::Start),
+                        pack_end = &gtk::WindowControls::new(gtk::PackType::End),
                         add_css_class: "flat",
                         
                         #[wrap(Some)]
