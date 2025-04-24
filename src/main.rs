@@ -52,7 +52,7 @@ impl SimpleComponent for App {
                             set_tooltip_text: Some("Search for emojis"),
                             
                             // focus the searchbar when launching the app
-                        // connect_realize => move |entry| {
+                            // connect_realize => move |entry| {
                             //     entry.grab_focus();
                             // },
                             
