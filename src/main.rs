@@ -15,6 +15,7 @@ struct App {
     _emojis_food: FactoryVecDeque<EmojiButton>,
     _emojis_animals: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
+    stack: gtk::Stack,
 }
 
 #[relm4::component]
@@ -56,7 +57,8 @@ impl SimpleComponent for App {
                             // },
                             
                             connect_changed => move |entry| {
-                                println!("{}", entry.text().to_string());
+                                let search = entry.text().to_string();
+                                println!("{}", search);
                             },
                         },
                     },
@@ -65,41 +67,57 @@ impl SimpleComponent for App {
                     gtk::ScrolledWindow {
                         set_vexpand: true,
                         
-                        gtk::Box {
-                            set_orientation: gtk::Orientation::Vertical,
-                            
-                            // Smile and Faces
-                            gtk::Label::new(Some("Smile and Faces")),
-                            
-                            #[local]
-                            smile_grid -> gtk::Grid {
+                        #[name = "stack"]
+                        gtk::Stack {
+
+                            add_child = &gtk::Box {
                                 set_orientation: gtk::Orientation::Vertical,
-                                set_margin_all: 5,
-                                set_column_spacing: 15,
-                                set_row_spacing: 15,
+                                
+                                // Smile and Faces
+                                gtk::Label::new(Some("Smile and Faces")),
+                                
+                                #[local]
+                                smile_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                },
+                                
+                                // Food and Drinks
+                                gtk::Label::new(Some("Food and Drinks")),
+                                
+                                #[local]
+                                food_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                },
+                                
+                                // Animals and Nature
+                                gtk::Label::new(Some("Animals and Nature")),
+                                
+                                #[local]
+                                animals_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                },
+                            } -> {
+                                set_name: "emoji_list",
                             },
-                            
-                            // Food and Drinks
-                            gtk::Label::new(Some("Food and Drinks")),
-                            
-                            #[local]
-                            food_grid -> gtk::Grid {
+
+                            add_child = &gtk::Box {
                                 set_orientation: gtk::Orientation::Vertical,
-                                set_margin_all: 5,
-                                set_column_spacing: 15,
-                                set_row_spacing: 15,
-                            },
-                            
-                            // Animals and Nature
-                            gtk::Label::new(Some("Animals and Nature")),
-                            
-                            #[local]
-                            animals_grid -> gtk::Grid {
-                                set_orientation: gtk::Orientation::Vertical,
-                                set_margin_all: 5,
-                                set_column_spacing: 15,
-                                set_row_spacing: 15,
-                            },
+
+                                gtk::Label {
+                                    set_label: "Search Results"
+                                }
+                            } -> {
+                                set_name: "search_results",
+                            }
                         }
                     }
                 },
@@ -123,15 +141,18 @@ impl SimpleComponent for App {
         let animals_grid = gtk::Grid::default();
         let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid);
 
-            
-        let model = App {
+        
+        let mut model = App {
             _emojis_smiles: emojis_smile,
             _emojis_food: emojis_food,
             _emojis_animals: emojis_animals,
             entry: gtk::EntryBuffer::default(),
+            stack: gtk::Stack::default(),
         };
 
         let widgets = view_output!();
+
+        model.stack = widgets.stack.clone();
 
         ComponentParts { model, widgets }
     }
