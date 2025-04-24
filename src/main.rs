@@ -35,6 +35,10 @@ impl SimpleComponent for App {
                 set_title_widget = &gtk::Entry {
                     set_buffer: &model.entry,
                     set_tooltip_text: Some("Search for emojis"),
+
+                    connect_changed => move |entry| {
+                        println!("{}", entry.text().to_string());
+                    },
                 },
             },
 
