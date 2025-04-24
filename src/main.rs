@@ -27,6 +27,7 @@ impl SimpleComponent for App {
         gtk::ApplicationWindow {
             // set_title: Some("Entry example"),
             set_default_size: (477, 400),
+            set_resizable: false,
 
             #[wrap(Some)]
             set_titlebar = &gtk::Grid::new(),
