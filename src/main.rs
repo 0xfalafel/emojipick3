@@ -10,6 +10,11 @@ const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
 const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
 
+#[derive(Debug)]
+enum Msg {
+    SearchedText(String),
+}
+
 struct App {
     _emojis_smiles: FactoryVecDeque<EmojiButton>,
     _emojis_food: FactoryVecDeque<EmojiButton>,
@@ -21,7 +26,7 @@ struct App {
 #[relm4::component]
 impl SimpleComponent for App {
     type Init = ();
-    type Input = ();
+    type Input = Msg;
     type Output = ();
 
     view! {
@@ -56,10 +61,10 @@ impl SimpleComponent for App {
                             //     entry.grab_focus();
                             // },
                             
-                            connect_changed => move |entry| {
-                                let search = entry.text().to_string();
-                                println!("{}", search);
-                            },
+                            connect_changed[sender] => move |entry| {
+                                let text = entry.text().to_string();
+                                sender.input(Msg::SearchedText(text))
+                            }
                         },
                     },
                     
@@ -128,7 +133,7 @@ impl SimpleComponent for App {
     fn init(
         _init: Self::Init,
         root: Self::Root,
-        _sender: ComponentSender<Self>,
+        sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         load_css();
 
@@ -155,6 +160,14 @@ impl SimpleComponent for App {
         model.stack = widgets.stack.clone();
 
         ComponentParts { model, widgets }
+    }
+
+    fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>) {
+        match message {
+            Msg::SearchedText(search) => {
+                println!("Searched {}", search);
+            }
+        }
     }
 }
 
