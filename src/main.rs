@@ -32,7 +32,7 @@ impl SimpleComponent for App {
     view! {
         gtk::ApplicationWindow {
             // set_title: Some("Entry example"),
-            set_default_size: (477, 400),
+            set_default_size: (493, 400),
             set_resizable: false,
 
             #[wrap(Some)]
