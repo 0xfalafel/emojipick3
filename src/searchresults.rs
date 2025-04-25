@@ -1,4 +1,5 @@
 use relm4::gtk;
+use relm4::gtk::prelude::{GridExt, OrientableExt, WidgetExt};
 use relm4::prelude::*;
 
 use crate::emojibutton::EmojiButton;
@@ -21,14 +22,14 @@ impl SimpleComponent for SearchResults {
                 set_label: "Search results"
             },
 
-            #[local]
-            emoji_grid -> gtk::Grid {
+            #[name = "emoji_grid"]
+            gtk::Grid {
                 set_orientation: gtk::Orientation::Vertical,
                 set_margin_all: 5,
                 set_column_spacing: 15,
                 set_row_spacing: 15,
                 add_css_class: "emojigrid",
-            },
+            }
         }
     }
 
