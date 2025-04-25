@@ -107,6 +107,7 @@ impl Component for App {
                                     set_margin_all: 5,
                                     set_column_spacing: 15,
                                     set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
                                 },
                                 
                                 // Food and Drinks
@@ -121,6 +122,7 @@ impl Component for App {
                                     set_margin_all: 5,
                                     set_column_spacing: 15,
                                     set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
                                 },
                                 
                                 // Animals and Nature
