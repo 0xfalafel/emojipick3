@@ -1,4 +1,5 @@
 use gtk::prelude::*;
+use relm4::gtk::gdk::Display;
 use relm4::gtk::{gdk, Grid};
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
@@ -176,7 +177,14 @@ impl Component for App {
             Msg::Clicked(symbol, _name) => {
                 root.hide();
                 println!("You clicked {}", symbol);
-                relm4::main_application().quit();
+
+                // Copy the emoji to the clipboard
+                if let Some(display) = Display::default() {
+                    let clipboard = display.clipboard();
+                    clipboard.set_text(&symbol);
+                }
+à                // root.close();
+                // relm4::main_application().quit();
             },
         }
     }
