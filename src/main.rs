@@ -3,6 +3,8 @@ use relm4::gtk::gdk::Display;
 use relm4::gtk::{gdk, Grid};
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
+use std::process::Command;
+use std::time::Duration;
 
 mod emojibutton;
 use emojibutton::EmojiButton;
@@ -177,14 +179,26 @@ impl Component for App {
             Msg::Clicked(symbol, _name) => {
                 root.hide();
                 println!("You clicked {}", symbol);
-
+                
                 // Copy the emoji to the clipboard
                 if let Some(display) = Display::default() {
                     let clipboard = display.clipboard();
                     clipboard.set_text(&symbol);
                 }
-à                // root.close();
-                // relm4::main_application().quit();
+                                
+                // Use a system command to paste the emoji
+                // xdotool key ctrl+v
+                Command::new("xdotool")
+                    .args(["key", "ctrl+shift+v"])
+                    .status()
+                    .expect("Failed to execute command");
+            
+                // Schedule application quit after a short delay
+                // For some reason, the application close before the emoji is paste
+                // with thread::sleep.
+                gtk::glib::timeout_add_once(Duration::from_millis(250), move || {
+                    relm4::main_application().quit();
+                });
             },
         }
     }
