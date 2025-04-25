@@ -215,10 +215,9 @@ impl Component for App {
                     .status()
                     .expect("Failed to execute command");
             
-                // Schedule application quit after a short delay
                 // For some reason, the application close before the emoji is paste
                 // with thread::sleep.
-                gtk::glib::timeout_add_once(Duration::from_millis(250), move || {
+                gtk::glib::timeout_add_once(Duration::from_millis(1), move || {
                     relm4::main_application().quit();
                 });
             },
