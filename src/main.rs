@@ -1,5 +1,5 @@
 use gtk::prelude::*;
-use relm4::gtk::gdk::Display;
+use relm4::gtk::gdk::{Display, Key};
 use relm4::gtk::{gdk, Grid};
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
@@ -17,6 +17,7 @@ const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
 pub enum Msg {
     SearchedText(String),
     Clicked(String, String),
+    Quit,
 }
 
 struct App {
@@ -44,6 +45,15 @@ impl Component for App {
             #[wrap(Some)]
             set_titlebar = &gtk::Grid::new(),
 
+            add_controller = gtk::EventControllerKey {
+                connect_key_pressed[sender] => move |_, key, _, _| {
+                    if key == Key::Escape {
+                        sender.input(Msg::Quit);
+                    }
+                    gtk::glib::Propagation::Proceed
+                }
+            },
+            
             gtk::WindowHandle {
 
                 gtk::Box {
@@ -200,6 +210,9 @@ impl Component for App {
                     relm4::main_application().quit();
                 });
             },
+            Msg::Quit => {
+                relm4::main_application().quit();
+            }
         }
     }
 }
