@@ -71,8 +71,9 @@ impl Component for App {
                         #[wrap(Some)]
                         set_title_widget = &gtk::Entry {
                             set_buffer: &model.entry,
+                            set_placeholder_text: Some("Search for emojis"),
                             set_tooltip_text: Some("Search for emojis"),
-                            
+
                             // focus the searchbar when launching the app
                             // connect_realize => move |entry| {
                             //     entry.grab_focus();
