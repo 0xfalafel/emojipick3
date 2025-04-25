@@ -45,6 +45,7 @@ impl Component for App {
             #[wrap(Some)]
             set_titlebar = &gtk::Grid::new(),
 
+            /// Quit the App when `Esc` is pressed
             add_controller = gtk::EventControllerKey {
                 connect_key_pressed[sender] => move |_, key, _, _| {
                     if key == Key::Escape {
