@@ -3,6 +3,14 @@
     /* line-height: 30px; */
 }
 
+.category {
+	margin-top: 14px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-family: Iter;
+	font-weight: bold;
+}
+
 entry {
     min-width: 340px;
     min-height: 24px;

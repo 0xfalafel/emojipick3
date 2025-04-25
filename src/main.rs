@@ -96,7 +96,10 @@ impl Component for App {
                                 set_orientation: gtk::Orientation::Vertical,
                                 
                                 // Smile and Faces
-                                gtk::Label::new(Some("Smile and Faces")),
+                                gtk::Label {
+                                    set_label: "Smile and Faces",
+                                    add_css_class: "category",
+                                },
                                 
                                 #[local]
                                 smile_grid -> gtk::Grid {
@@ -107,7 +110,10 @@ impl Component for App {
                                 },
                                 
                                 // Food and Drinks
-                                gtk::Label::new(Some("Food and Drinks")),
+                                gtk::Label {
+                                    set_label: "Food and Drinks",
+                                    add_css_class: "category",
+                                },
                                 
                                 #[local]
                                 food_grid -> gtk::Grid {
@@ -118,7 +124,10 @@ impl Component for App {
                                 },
                                 
                                 // Animals and Nature
-                                gtk::Label::new(Some("Animals and Nature")),
+                                gtk::Label {
+                                    set_label: "Animals and Nature",
+                                    add_css_class: "category",
+                                },
                                 
                                 #[local]
                                 animals_grid -> gtk::Grid {
