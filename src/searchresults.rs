@@ -1,22 +1,20 @@
 use relm4::gtk;
 use relm4::prelude::*;
-use relm4::component;
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct SearchResults {}
 
-#[derive(Debug)]
-pub enum SearchResultsMsg {}
+// #[derive(Debug)]
+// pub enum SearchResultsMsg {}
 
-#[component(pub)]
+#[relm4::component(pub)]
 impl SimpleComponent for SearchResults {
     type Init = ();
-    type Input = SearchResultsMsg;
+    type Input = ();
     type Output = ();
 
     view! {
-        #[root]
-        gtk::Box {
+        gtk::ScrolledWindow {
             gtk::Label {
                 set_label: "Search results"
             }
@@ -28,7 +26,7 @@ impl SimpleComponent for SearchResults {
         root: Self::Root,
         _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let model = SearchResults::default();
+        let model = SearchResults {};
         let widgets = view_output!();
 
         ComponentParts { model, widgets }

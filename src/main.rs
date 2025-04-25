@@ -149,7 +149,9 @@ impl Component for App {
                             add_child = &gtk::Box {
                                 set_orientation: gtk::Orientation::Vertical,
 
-                                SearchResults,
+                                #[local]
+                                search_results -> gtk::ScrolledWindow,
+                            
                             } -> {
                                 set_name: "search_results",
                             }
@@ -176,6 +178,11 @@ impl Component for App {
         let animals_grid = gtk::Grid::default();
         let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid, sender.clone());
 
+        let search_results = SearchResults::builder()
+            .launch(())
+            .detach()
+            .widget()
+            .clone();
         
         let mut model = App {
             _emojis_smiles: emojis_smile,
