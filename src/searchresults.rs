@@ -3,9 +3,12 @@ use relm4::gtk::prelude::{GridExt, OrientableExt, WidgetExt};
 use relm4::prelude::*;
 
 use crate::emojibutton::EmojiButton;
+use crate::SMILE_FACES;
 
-#[derive(Default, Debug)]
-pub struct SearchResults {}
+#[derive(Debug)]
+pub struct SearchResults {
+    search_res: FactoryVecDeque<EmojiButton>,
+}
 
 // #[derive(Debug)]
 // pub enum SearchResultsMsg {}
@@ -38,18 +41,31 @@ impl SimpleComponent for SearchResults {
         root: Self::Root,
         _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let model = SearchResults {};
         let widgets = view_output!();
-
+        
         let emoji_grid = gtk::Grid::default();
-
+        
         let mut res_emojis: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
             .launch(emoji_grid.clone())
             .detach();
-            // .forward(sender.input_sender(), |msg| match msg {
-            //     Msg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
-            //     _ => todo!()
-            // });
+
+        let emojis_list: Vec<EmojiButton> = serde_json::from_str(SMILE_FACES).unwrap();
+
+        // Use the Factory to create all the emoji buttons
+        {
+            let mut guard = res_emojis.guard();
+    
+            for emoji in emojis_list {
+                guard.push_back((emoji.symbol, emoji.name));
+            }
+        }
+                // .forward(sender.input_sender(), |msg| match msg {
+        //     Msg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
+        //     _ => todo!()
+        // });
+        let model = SearchResults {
+            search_res: res_emojis,
+        };
 
         ComponentParts { model, widgets }
     }
