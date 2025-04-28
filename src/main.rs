@@ -7,7 +7,7 @@ use std::process::Command;
 use std::time::Duration;
 
 mod emojibutton;
-use emojibutton::EmojiButton;
+use emojibutton::{EmojiButton, EmojiMsg};
 
 const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
@@ -233,8 +233,7 @@ fn initialize_emoji_grid(json_emojis: &str, grid: &Grid, sender: ComponentSender
     let mut emoji_buttons: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
         .launch(grid.clone())
         .forward(sender.input_sender(), |msg| match msg {
-            Msg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
-            _ => todo!()
+            EmojiMsg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
         });
 
 

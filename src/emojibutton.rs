@@ -4,7 +4,10 @@ use relm4::factory::Position;
 use relm4::factory::positions::GridPosition;
 use serde::Deserialize;
 
-use crate::Msg;
+#[derive(Debug)]
+pub enum EmojiMsg {
+    Clicked(String, String),
+}
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct EmojiButton {
@@ -16,7 +19,7 @@ pub struct EmojiButton {
 impl FactoryComponent for EmojiButton {
     type Init = (String, String);
     type Input = ();
-    type Output = Msg;
+    type Output = EmojiMsg;
     type CommandOutput = ();
     type ParentWidget = gtk::Grid;
 
@@ -26,7 +29,7 @@ impl FactoryComponent for EmojiButton {
             set_tooltip: &self.name,
 
             connect_clicked[sender, emoji = self.clone()] => move |_| {
-                if let Err(e) = sender.output(Msg::Clicked(emoji.symbol.clone(), emoji.name.clone())) {
+                if let Err(e) = sender.output(EmojiMsg::Clicked(emoji.symbol.clone(), emoji.name.clone())) {
                     eprintln!("Failed to send message from EmojiButton: {:?}", e);
                 }
             },
