@@ -90,58 +90,54 @@ impl Component for App {
                     #[name = "stack"]
                     gtk::Stack {
 
-                        add_child = &gtk::Box {
-                            set_orientation: gtk::Orientation::Vertical,
-
-                            gtk::ScrolledWindow {
-                                set_vexpand: true,
+                        add_child = &gtk::ScrolledWindow {
+                            set_vexpand: true,
+                            
+                            gtk::Box {
+                                set_orientation: gtk::Orientation::Vertical,
+                                // Smile and Faces
+                                gtk::Label {
+                                    set_label: "Smile and Faces",
+                                    add_css_class: "category",
+                                },
                                 
-                                gtk::Box {
+                                #[local]
+                                smile_grid -> gtk::Grid {
                                     set_orientation: gtk::Orientation::Vertical,
-                                    // Smile and Faces
-                                    gtk::Label {
-                                        set_label: "Smile and Faces",
-                                        add_css_class: "category",
-                                    },
-                                    
-                                    #[local]
-                                    smile_grid -> gtk::Grid {
-                                        set_orientation: gtk::Orientation::Vertical,
-                                        set_margin_all: 5,
-                                        set_column_spacing: 15,
-                                        set_row_spacing: 15,
-                                        add_css_class: "emojigrid",
-                                    },
-                                    
-                                    // Food and Drinks
-                                    gtk::Label {
-                                        set_label: "Food and Drinks",
-                                        add_css_class: "category",
-                                    },
-                                    
-                                    #[local]
-                                    food_grid -> gtk::Grid {
-                                        set_orientation: gtk::Orientation::Vertical,
-                                        set_margin_all: 5,
-                                        set_column_spacing: 15,
-                                        set_row_spacing: 15,
-                                        add_css_class: "emojigrid",
-                                    },
-                                    
-                                    // Animals and Nature
-                                    gtk::Label {
-                                        set_label: "Animals and Nature",
-                                        add_css_class: "category",
-                                    },
-                                    
-                                    #[local]
-                                    animals_grid -> gtk::Grid {
-                                        set_orientation: gtk::Orientation::Vertical,
-                                        set_margin_all: 5,
-                                        set_column_spacing: 15,
-                                        set_row_spacing: 15,
-                                    },
-                                }
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
+                                },
+                                
+                                // Food and Drinks
+                                gtk::Label {
+                                    set_label: "Food and Drinks",
+                                    add_css_class: "category",
+                                },
+                                
+                                #[local]
+                                food_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
+                                },
+                                
+                                // Animals and Nature
+                                gtk::Label {
+                                    set_label: "Animals and Nature",
+                                    add_css_class: "category",
+                                },
+                                
+                                #[local]
+                                animals_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                },
                             }
                         } -> {
                             set_name: "emoji_list",
