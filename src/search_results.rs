@@ -41,10 +41,12 @@ impl SimpleComponent for SearchResults {
         root: Self::Root,
         _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let emoji_res = gtk::Grid::new();
+        let widgets: SearchResultsWidgets = view_output!();
+
+        let emoji_res = widgets.emoji_res.clone();
 
         let mut emoji: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
-            .launch(emoji_res.clone())
+            .launch(emoji_res)
             .detach();
             // .forward(sender.input_sender(), |msg| match msg {
             //     EmojiMsg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
@@ -53,16 +55,13 @@ impl SimpleComponent for SearchResults {
         // Use the Factory to create all the emoji buttons
         {
             let mut guard = emoji.guard();
-
             guard.push_back(("🐨".to_string(), "koala".to_string()));
         }
 
 
-        let model = SearchResults {
+        let model: SearchResults = SearchResults {
             _emoji: emoji,
         };
-
-        let widgets = view_output!();
 
         ComponentParts { model, widgets }
     }
