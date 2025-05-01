@@ -1,4 +1,6 @@
+use gtk::prelude::*;
 use relm4::prelude::*;
+
 
 // use crate::emojibutton::{EmojiButton, EmojiMsg};
 
@@ -18,6 +20,7 @@ impl SimpleComponent for SearchResults {
     view! {
 
         gtk::Box {
+            set_orientation: gtk::Orientation::Vertical,
 
             gtk::Label {
                 set_label: "Search Results"
