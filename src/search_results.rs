@@ -77,11 +77,10 @@ impl SimpleComponent for SearchResults {
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, msg: Self::Input, _sender: ComponentSender<Self>) {
+    fn update(&mut self, msg: Self::Input, sender: ComponentSender<Self>) {
         match msg {
             SearchMsg::Clicked(symbol, name) => {
-                println!("Emoji cliqué : {} ({})", symbol, name);
-                // Ici, vous pouvez aussi mettre à jour un label ou effectuer une autre action
+                let _ = sender.output(SearchMsg::Clicked(symbol, name));
             }
         }
     }
