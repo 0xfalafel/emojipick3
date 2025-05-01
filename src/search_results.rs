@@ -18,16 +18,18 @@ pub enum SearchMsg {
 #[derive(Debug)]
 pub struct SearchResults {
     _emoji: FactoryVecDeque<EmojiButton>,
+    search: String,
 }
 
 #[relm4::component(pub)]
-impl SimpleComponent for SearchResults {
+impl Component for SearchResults {
     type Init = ();
     type Input = SearchMsg;
     type Output = SearchMsg;
+    type CommandOutput = ();
 
     view! {
-
+        #[root]
         gtk::Box {
             set_orientation: gtk::Orientation::Vertical,
 
@@ -72,19 +74,34 @@ impl SimpleComponent for SearchResults {
 
         let model: SearchResults = SearchResults {
             _emoji: emoji,
+            search: "".to_string(),
         };
 
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, msg: Self::Input, sender: ComponentSender<Self>) {
+    fn update(&mut self, msg: Self::Input, sender: ComponentSender<Self>, _root: &Self::Root) {
         match msg {
             SearchMsg::Clicked(symbol, name) => {
                 let _ = sender.output(SearchMsg::Clicked(symbol, name));
             },
             SearchMsg::SearchedText(search) => {
+                self.search = search.clone();
                 println!("You searched this text: {}", search);
             }
         }
     }
+
+    fn update_view(&self, widgets: &mut Self::Widgets, sender: ComponentSender<Self>) {
+        // match msg {
+        //     SearchMsg::Clicked(symbol, name) => {
+        //         let _ = sender.output(SearchMsg::Clicked(symbol, name));
+        //     },
+        //     SearchMsg::SearchedText(search) => {
+        //         println!("You searched this text: {}", search);
+        //     }
+        // }
+        
+    }
+
 }
