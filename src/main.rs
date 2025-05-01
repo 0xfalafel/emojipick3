@@ -29,6 +29,7 @@ struct App {
     _emojis_animals: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
     stack: gtk::Stack,
+    search_res: Controller<SearchResults>,
 }
 
 #[relm4::component]
@@ -149,9 +150,7 @@ impl Component for App {
                         add_child = &gtk::Box {
                             set_orientation: gtk::Orientation::Vertical,
 
-                            SearchResults {
-                                
-                            }
+                            append: model.search_res.widget()
 
                         } -> {
                             set_name: "search_results",
@@ -178,6 +177,9 @@ impl Component for App {
         let animals_grid = gtk::Grid::default();
         let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid, sender.clone());
 
+        let search_res = SearchResults::builder()
+            .launch(())
+            .detach();
         
         let mut model = App {
             _emojis_smiles: emojis_smile,
@@ -185,6 +187,7 @@ impl Component for App {
             _emojis_animals: emojis_animals,
             entry: gtk::EntryBuffer::default(),
             stack: gtk::Stack::default(),
+            search_res: search_res,
         };
 
         let widgets = view_output!();
