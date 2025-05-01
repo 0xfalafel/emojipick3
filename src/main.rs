@@ -9,6 +9,9 @@ use std::time::Duration;
 mod emojibutton;
 use emojibutton::{EmojiButton, EmojiMsg};
 
+mod search_results;
+use search_results::SearchResults;
+
 const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
 const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
@@ -146,9 +149,10 @@ impl Component for App {
                         add_child = &gtk::Box {
                             set_orientation: gtk::Orientation::Vertical,
 
-                            gtk::Label {
-                                set_label: "Search Results"
+                            SearchResults {
+                                
                             }
+
                         } -> {
                             set_name: "search_results",
                         }
