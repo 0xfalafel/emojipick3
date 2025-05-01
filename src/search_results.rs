@@ -11,7 +11,7 @@ use crate::emojibutton::{EmojiButton, EmojiMsg};
 
 #[derive(Debug)]
 pub enum SearchMsg {
-    // SearchedText(String),
+    SearchedText(String),
     Clicked(String, String),
 }
 
@@ -81,6 +81,9 @@ impl SimpleComponent for SearchResults {
         match msg {
             SearchMsg::Clicked(symbol, name) => {
                 let _ = sender.output(SearchMsg::Clicked(symbol, name));
+            },
+            SearchMsg::SearchedText(search) => {
+                println!("You searched this text: {}", search);
             }
         }
     }

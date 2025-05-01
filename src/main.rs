@@ -181,6 +181,7 @@ impl Component for App {
             .launch(())
             .forward(sender.input_sender(), |msg| match msg {
                 SearchMsg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
+                SearchMsg::SearchedText(_) => unreachable!(),
             });
             
         let mut model = App {
@@ -206,6 +207,8 @@ impl Component for App {
                     0 => self.stack.set_visible_child_name("emoji_list"),
                     _ => self.stack.set_visible_child_name("search_results"),
                 }
+
+                self.search_res.emit(SearchMsg::SearchedText(search))
             },
             Msg::Clicked(symbol, _name) => {
                 root.hide();
