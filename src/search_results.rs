@@ -2,12 +2,18 @@ use gtk::prelude::*;
 use relm4::prelude::*;
 
 
-use crate::emojibutton::EmojiButton;
+use crate::emojibutton::{EmojiButton, EmojiMsg};
 // use crate::emojibutton::{EmojiButton, EmojiMsg};
 
 // const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 // const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
 // const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
+
+#[derive(Debug)]
+pub enum SearchMsg {
+    // SearchedText(String),
+    Clicked(String, String),
+}
 
 #[derive(Debug)]
 pub struct SearchResults {
@@ -17,8 +23,8 @@ pub struct SearchResults {
 #[relm4::component(pub)]
 impl SimpleComponent for SearchResults {
     type Init = ();
-    type Input = ();
-    type Output = ();
+    type Input = SearchMsg;
+    type Output = SearchMsg;
 
     view! {
 
@@ -33,24 +39,29 @@ impl SimpleComponent for SearchResults {
             gtk::Grid {
 
             },
+
+            #[name = "searched"]
+            gtk::Label {
+                set_label: "Hi mom!",
+            }
         }
     }
 
     fn init(
         _init: Self::Init,
         root: Self::Root,
-        _sender: ComponentSender<Self>,
+        sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
+
         let widgets: SearchResultsWidgets = view_output!();
 
         let emoji_res = widgets.emoji_res.clone();
 
         let mut emoji: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
             .launch(emoji_res)
-            .detach();
-            // .forward(sender.input_sender(), |msg| match msg {
-            //     EmojiMsg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
-            // });
+            .forward(sender.input_sender(), |msg| match msg {
+                EmojiMsg::Clicked(symbol, name) => SearchMsg::Clicked(symbol, name),
+            });
 
         // Use the Factory to create all the emoji buttons
         {
@@ -64,5 +75,14 @@ impl SimpleComponent for SearchResults {
         };
 
         ComponentParts { model, widgets }
+    }
+
+    fn update(&mut self, msg: Self::Input, _sender: ComponentSender<Self>) {
+        match msg {
+            SearchMsg::Clicked(symbol, name) => {
+                println!("Emoji cliqué : {} ({})", symbol, name);
+                // Ici, vous pouvez aussi mettre à jour un label ou effectuer une autre action
+            }
+        }
     }
 }

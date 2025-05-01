@@ -10,7 +10,7 @@ mod emojibutton;
 use emojibutton::{EmojiButton, EmojiMsg};
 
 mod search_results;
-use search_results::SearchResults;
+use search_results::{SearchResults, SearchMsg};
 
 const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
@@ -179,8 +179,10 @@ impl Component for App {
 
         let search_res = SearchResults::builder()
             .launch(())
-            .detach();
-        
+            .forward(sender.input_sender(), |msg| match msg {
+                SearchMsg::Clicked(symbol, name) => Msg::Clicked(symbol, name),
+            });
+            
         let mut model = App {
             _emojis_smiles: emojis_smile,
             _emojis_food: emojis_food,
