@@ -13,5 +13,13 @@
     {"symbol": "✌️", "name": "victory hand"},
     {"symbol": "🤞", "name": "crossed fingers"},
     {"symbol": "🤘", "name": "sign of the horns"},
-    {"symbol": "👌", "name": "OK hand"}
+    {"symbol": "👌", "name": "OK hand"},
+    {"symbol": "🤌", "name": "pinched fingers"},
+    {"symbol": "🤏", "name": "pinching hand"},
+    {"symbol": "✋", "name": "raised hand"},
+    {"symbol": "🖖", "name": "vulcan salute"},
+    {"symbol": "👊", "name": "oncoming fist"},
+    {"symbol": "✊", "name": "raised fist"},
+    {"symbol": "🤚", "name": "raised back of hand"},
+    {"symbol": "🖐️", "name": "hand with fingers splayed"}
 ]
