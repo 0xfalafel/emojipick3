@@ -1,13 +1,20 @@
 use gtk::prelude::*;
 use relm4::prelude::*;
+use serde::Deserialize;
 
 
 use crate::emojibutton::{EmojiButton, EmojiMsg};
 // use crate::emojibutton::{EmojiButton, EmojiMsg};
 
-// const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
-// const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
-// const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
+const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
+const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
+const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
+
+#[derive(Debug, Deserialize, Clone)]
+struct Emoji {
+    symbol: String,
+    name: String,
+}
 
 #[derive(Debug)]
 pub enum SearchMsg {
@@ -17,8 +24,8 @@ pub enum SearchMsg {
 
 #[derive(Debug)]
 pub struct SearchResults {
-    _emoji: FactoryVecDeque<EmojiButton>,
-    search: String,
+    emoji: FactoryVecDeque<EmojiButton>,
+    all_emojis: Vec<Emoji>,
 }
 
 #[relm4::component(pub)]
@@ -65,16 +72,18 @@ impl Component for SearchResults {
                 EmojiMsg::Clicked(symbol, name) => SearchMsg::Clicked(symbol, name),
             });
 
-        // Use the Factory to create all the emoji buttons
-        {
-            let mut guard = emoji.guard();
-            guard.push_back(("🐨".to_string(), "koala".to_string()));
-        }
-
+        // Parse JSON data
+        let mut all_emojis: Vec<Emoji> = serde_json::from_str(SMILE_FACES).unwrap();
+        all_emojis.extend(
+            serde_json::from_str::<Vec<Emoji>>(FOOD_DRINK).unwrap()
+        );
+        all_emojis.extend(
+            serde_json::from_str::<Vec<Emoji>>(ANIMALS_NATURE).unwrap()
+        );
 
         let model: SearchResults = SearchResults {
-            _emoji: emoji,
-            search: "".to_string(),
+            emoji: emoji,
+            all_emojis: all_emojis,
         };
 
         ComponentParts { model, widgets }
@@ -86,22 +95,24 @@ impl Component for SearchResults {
                 let _ = sender.output(SearchMsg::Clicked(symbol, name));
             },
             SearchMsg::SearchedText(search) => {
-                self.search = search.clone();
                 println!("You searched this text: {}", search);
+
+                // Search all emojis match the text searched
+                let search_res: Vec<(String, String)> = self.all_emojis
+                    .iter()
+                    .filter(|emoji| emoji.name.contains(&search))
+                    .map(|emoji| (emoji.symbol.clone(), emoji.name.clone()))
+                    .collect();
+                
+                // Update the emoji_res Grid with filtered emojis
+                let mut guard = self.emoji.guard();
+                guard.clear();
+                for (symbol, name) in search_res {
+                    guard.push_back((symbol, name));
+                }
+                
             }
         }
-    }
-
-    fn update_view(&self, widgets: &mut Self::Widgets, sender: ComponentSender<Self>) {
-        // match msg {
-        //     SearchMsg::Clicked(symbol, name) => {
-        //         let _ = sender.output(SearchMsg::Clicked(symbol, name));
-        //     },
-        //     SearchMsg::SearchedText(search) => {
-        //         println!("You searched this text: {}", search);
-        //     }
-        // }
-        
     }
 
 }
