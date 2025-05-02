@@ -39,19 +39,25 @@ impl Component for SearchResults {
         #[root]
         gtk::Box {
             set_orientation: gtk::Orientation::Vertical,
+            set_margin_all: 5,
+            set_spacing: 5,
+            set_vexpand: true,
+            set_hexpand: true,
 
-            gtk::Label {
-                set_label: "Search Results"
-            },
+            gtk::ScrolledWindow {
+                set_vexpand: true,
 
-            #[name = "emoji_res"]
-            gtk::Grid {
+                gtk::Label {
+                    set_label: "Search Results"
+                },
 
-            },
-
-            #[name = "searched"]
-            gtk::Label {
-                set_label: "Hi mom!",
+                #[name = "emoji_res"]
+                gtk::Grid {
+                    set_orientation: gtk::Orientation::Vertical,
+                    set_margin_all: 5,
+                    set_column_spacing: 15,
+                    set_row_spacing: 15,
+                },
             }
         }
     }
@@ -66,7 +72,7 @@ impl Component for SearchResults {
 
         let emoji_res = widgets.emoji_res.clone();
 
-        let mut emoji: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
+        let emoji: FactoryVecDeque<EmojiButton> = FactoryVecDeque::builder()
             .launch(emoji_res)
             .forward(sender.input_sender(), |msg| match msg {
                 EmojiMsg::Clicked(symbol, name) => SearchMsg::Clicked(symbol, name),
