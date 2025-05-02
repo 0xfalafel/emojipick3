@@ -1,0 +1,17 @@
+[
+    {"symbol": "👍", "name": "thumbs up"},
+    {"symbol": "👎", "name": "thumbs down"},
+    {"symbol": "👏", "name": "clapping hands"},
+    {"symbol": "🙌", "name": "raising hands"},
+    {"symbol": "👐", "name": "open hands"},
+    {"symbol": "🤝", "name": "handshake"},
+    {"symbol": "🙏", "name": "folded hands"},
+    {"symbol": "💪", "name": "flexed biceps"},
+    {"symbol": "👋", "name": "waving hand"},
+    {"symbol": "🤲", "name": "palms up together"},
+    {"symbol": "🤟", "name": "love-you gesture"},
+    {"symbol": "✌️", "name": "victory hand"},
+    {"symbol": "🤞", "name": "crossed fingers"},
+    {"symbol": "🤘", "name": "sign of the horns"},
+    {"symbol": "👌", "name": "OK hand"}
+]

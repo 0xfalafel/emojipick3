@@ -1,0 +1,17 @@
+[
+    {"symbol": "✈️", "name": "airplane"},
+    {"symbol": "🚗", "name": "car"},
+    {"symbol": "🚕", "name": "taxi"},
+    {"symbol": "🚙", "name": "sport utility vehicle"},
+    {"symbol": "🚌", "name": "bus"},
+    {"symbol": "🚎", "name": "trolleybus"},
+    {"symbol": "🏍", "name": "motorcycle"},
+    {"symbol": "🚲", "name": "bicycle"},
+    {"symbol": "🚢", "name": "ship"},
+    {"symbol": "🚀", "name": "rocket"},
+    {"symbol": "🌍", "name": "globe showing Europe-Africa"},
+    {"symbol": "🗽", "name": "Statue of Liberty"},
+    {"symbol": "🏰", "name": "castle"},
+    {"symbol": "🏝", "name": "desert island"},
+    {"symbol": "🏔", "name": "snow-capped mountain"}
+]

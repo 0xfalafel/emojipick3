@@ -15,6 +15,8 @@ use search_results::{SearchResults, SearchMsg};
 const SMILE_FACES: &str = include_str!("../data/smile_and_faces.json");
 const FOOD_DRINK: &str = include_str!("../data/food_and_drink.json");
 const ANIMALS_NATURE: &str = include_str!("../data/animals_and_nature.json");
+const PEOPLE_BODY: &str = include_str!("../data/people_and_body.json");
+const TRAVEL_PLACES: &str = include_str!("../data/travel_and_places.json");
 
 #[derive(Debug)]
 pub enum Msg {
@@ -27,6 +29,8 @@ struct App {
     _emojis_smiles: FactoryVecDeque<EmojiButton>,
     _emojis_food: FactoryVecDeque<EmojiButton>,
     _emojis_animals: FactoryVecDeque<EmojiButton>,
+    _emojis_people: FactoryVecDeque<EmojiButton>,
+    _emojis_travel: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
     stack: gtk::Stack,
     search_res: Controller<SearchResults>,
@@ -142,6 +146,36 @@ impl Component for App {
                                     set_column_spacing: 15,
                                     set_row_spacing: 15,
                                 },
+
+                                // People and Body
+                                gtk::Label {
+                                    set_label: "People and Body",
+                                    add_css_class: "category",
+                                },
+                                
+                                #[local]
+                                people_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
+                                },
+
+                                // Travel and Places
+                                gtk::Label {
+                                    set_label: "Travel and Places",
+                                    add_css_class: "category",
+                                },
+                                
+                                #[local]
+                                travel_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
+                                },
                             }
                         } -> {
                             set_name: "emoji_list",
@@ -177,6 +211,12 @@ impl Component for App {
         let animals_grid = gtk::Grid::default();
         let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid, sender.clone());
 
+        let people_grid = gtk::Grid::default();
+        let emojis_people = initialize_emoji_grid(PEOPLE_BODY, &people_grid, sender.clone());
+
+        let travel_grid = gtk::Grid::default();
+        let emojis_travel = initialize_emoji_grid(TRAVEL_PLACES, &travel_grid, sender.clone());
+
         let search_res = SearchResults::builder()
             .launch(())
             .forward(sender.input_sender(), |msg| match msg {
@@ -188,6 +228,8 @@ impl Component for App {
             _emojis_smiles: emojis_smile,
             _emojis_food: emojis_food,
             _emojis_animals: emojis_animals,
+            _emojis_people: emojis_people,
+            _emojis_travel: emojis_travel,
             entry: gtk::EntryBuffer::default(),
             stack: gtk::Stack::default(),
             search_res: search_res,
@@ -249,7 +291,13 @@ fn initialize_emoji_grid(json_emojis: &str, grid: &Grid, sender: ComponentSender
         });
 
 
-    let emojis_list: Vec<EmojiButton> = serde_json::from_str(json_emojis).unwrap();
+    let emojis_list: Vec<EmojiButton> = match serde_json::from_str(json_emojis) {
+        Ok(emoji_list) => emoji_list,
+        Err(e) => {
+            eprintln!("Failed to deserialize emoji list: {}", e);
+            panic!("Could not create emoji list.");
+        }
+    };
 
     // Use the Factory to create all the emoji buttons
     {
