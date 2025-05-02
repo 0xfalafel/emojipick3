@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>pro.lasne.emojipick</id>
+  
+  <name>EmojiPick</name>
+  <summary>Insert emojis anywhere.</summary>
+  
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  
+  <recommends>
+    <display_length compare="ge">250</display_length>
+  </recommends>
+  <content_rating type="oars-1.0" />
+
+  <description>
+    <p>
+      EmojiPick let&apos;s you insert emojis anywhere.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">pro.lasne.emojipick.desktop</launchable>
+</component>

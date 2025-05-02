@@ -1,0 +1,39 @@
+{
+    "app-id": "pro.lasne.emojipick",
+    "runtime": "io.elementary.Platform",
+    "runtime-version": "8",
+    "sdk": "io.elementary.Sdk",
+    "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
+    "command": "emojipick",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin"
+    },
+    "modules": [{
+        "name": "emojipick",
+        "buildsystem": "simple",
+        "build-options": {
+            "env": {
+                "CARGO_HOME": "/run/build/emojipick/cargo"
+            }
+        },
+        "build-commands": [
+            "cargo --offline fetch --manifest-path Cargo.toml --verbose",
+            "cargo --offline build --release --verbose",
+            "install -Dm644 ./data/pro.lasne.emojipick.desktop -t /app/share/applications/",
+            "install -Dm644 ./data/pro.lasne.emojipick.appdata.xml -t /app/share/appdata/",
+            "install -Dm755 ./target/release/emojipick -t /app/bin/"
+        ],
+        "sources": [{
+                "type": "dir",
+                "path": "."
+            },
+            "cargo-sources.json"
+        ]
+    }]
+}
