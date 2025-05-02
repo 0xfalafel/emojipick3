@@ -101,8 +101,6 @@ impl Component for SearchResults {
                 let _ = sender.output(SearchMsg::Clicked(symbol, name));
             },
             SearchMsg::SearchedText(search) => {
-                println!("You searched this text: {}", search);
-
                 // Search all emojis match the text searched
                 let search_res: Vec<(String, String)> = self.all_emojis
                     .iter()
