@@ -55,9 +55,27 @@ impl Component for App {
 
             /// Quit the App when `Esc` is pressed
             add_controller = gtk::EventControllerKey {
-                connect_key_pressed[sender] => move |_, key, _, _| {
+                    connect_key_pressed[sender, searchbar = searchbar.clone()] => move |_, key, _, _| {
                     if key == Key::Escape {
                         sender.input(Msg::Quit);
+                    } else if !matches!(key, Key::Up | Key::Down | Key::Right | Key::Left) {
+
+                        if searchbar.is_focus() {
+                            return gtk::glib::Propagation::Proceed
+                        }
+
+                        // If we aren't on the searchbar. Focus the searchbar and add some text.
+                        searchbar.grab_focus();
+                        if let Some(c) = key.to_unicode() {
+                            let buffer = searchbar.buffer();
+
+                            let text = buffer.text();
+                            let new_text = format!("{}{}", text, c);
+                            buffer.set_text(new_text);
+
+                            let position = searchbar.position();
+                            searchbar.set_position(position + c.len_utf8() as i32);
+                        }
                     }
                     gtk::glib::Propagation::Proceed
                 }
@@ -77,6 +95,7 @@ impl Component for App {
                         add_css_class: "flat",
                         
                         #[wrap(Some)]
+                        #[name = "searchbar"]
                         set_title_widget = &gtk::Entry {
                             set_buffer: &model.entry,
                             set_placeholder_text: Some("Search for emojis"),
