@@ -342,6 +342,6 @@ fn load_css() {
 }
 
 fn main() {
-    let app = RelmApp::new("io.github.falafel.emojipick");
+    let app = RelmApp::new("pro.lasne.emojipick");
     app.run::<App>(());
 }
