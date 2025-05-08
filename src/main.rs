@@ -118,85 +118,103 @@ impl Component for App {
                     #[name = "stack"]
                     gtk::Stack {
 
-                        add_child = &gtk::ScrolledWindow {
+                        add_child = &gtk::Box {      
+                            set_orientation: gtk::Orientation::Vertical,
                             set_vexpand: true,
-                            
+
                             gtk::Box {
-                                set_orientation: gtk::Orientation::Vertical,
-                                // Smile and Faces
-                                gtk::Label {
-                                    set_label: "Smile and Faces",
-                                    add_css_class: "category",
-                                },
-                                
-                                #[local]
-                                smile_grid -> gtk::Grid {
-                                    set_orientation: gtk::Orientation::Vertical,
-                                    set_margin_all: 5,
-                                    set_column_spacing: 15,
-                                    set_row_spacing: 15,
-                                    add_css_class: "emojigrid",
+                                add_css_class: relm4::css::LINKED,
+
+                                gtk::Button {
+                                    set_label: "Smile"
                                 },
 
-
-                                // People and Body
-                                gtk::Label {
-                                    set_label: "People and Body",
-                                    add_css_class: "category",
-                                },
-                                
-                                #[local]
-                                people_grid -> gtk::Grid {
-                                    set_orientation: gtk::Orientation::Vertical,
-                                    set_margin_all: 5,
-                                    set_column_spacing: 15,
-                                    set_row_spacing: 15,
-                                    add_css_class: "emojigrid",
-                                },
-                                
-                                // Food and Drinks
-                                gtk::Label {
-                                    set_label: "Food and Drinks",
-                                    add_css_class: "category",
-                                },
-                                
-                                #[local]
-                                food_grid -> gtk::Grid {
-                                    set_orientation: gtk::Orientation::Vertical,
-                                    set_margin_all: 5,
-                                    set_column_spacing: 15,
-                                    set_row_spacing: 15,
-                                    add_css_class: "emojigrid",
-                                },
-                                
-                                // Animals and Nature
-                                gtk::Label {
-                                    set_label: "Animals and Nature",
-                                    add_css_class: "category",
-                                },
-                                
-                                #[local]
-                                animals_grid -> gtk::Grid {
-                                    set_orientation: gtk::Orientation::Vertical,
-                                    set_margin_all: 5,
-                                    set_column_spacing: 15,
-                                    set_row_spacing: 15,
+                                gtk::Button {
+                                    set_label: "Nature"
                                 },
 
-                                // Travel and Places
-                                gtk::Label {
-                                    set_label: "Travel and Places",
-                                    add_css_class: "category",
-                                },
-                                
-                                #[local]
-                                travel_grid -> gtk::Grid {
+                            },
+
+                            gtk::ScrolledWindow {
+                                set_vexpand: true,
+                            
+                                gtk::Box {
                                     set_orientation: gtk::Orientation::Vertical,
-                                    set_margin_all: 5,
-                                    set_column_spacing: 15,
-                                    set_row_spacing: 15,
-                                    add_css_class: "emojigrid",
-                                },
+                                    // Smile and Faces
+                                    gtk::Label {
+                                        set_label: "Smile and Faces",
+                                        add_css_class: "category",
+                                    },
+                                    
+                                    #[local]
+                                    smile_grid -> gtk::Grid {
+                                        set_orientation: gtk::Orientation::Vertical,
+                                        set_margin_all: 5,
+                                        set_column_spacing: 15,
+                                        set_row_spacing: 15,
+                                        add_css_class: "emojigrid",
+                                    },
+
+
+                                    // People and Body
+                                    gtk::Label {
+                                        set_label: "People and Body",
+                                        add_css_class: "category",
+                                    },
+                                    
+                                    #[local]
+                                    people_grid -> gtk::Grid {
+                                        set_orientation: gtk::Orientation::Vertical,
+                                        set_margin_all: 5,
+                                        set_column_spacing: 15,
+                                        set_row_spacing: 15,
+                                        add_css_class: "emojigrid",
+                                    },
+                                    
+                                    // Food and Drinks
+                                    gtk::Label {
+                                        set_label: "Food and Drinks",
+                                        add_css_class: "category",
+                                    },
+                                    
+                                    #[local]
+                                    food_grid -> gtk::Grid {
+                                        set_orientation: gtk::Orientation::Vertical,
+                                        set_margin_all: 5,
+                                        set_column_spacing: 15,
+                                        set_row_spacing: 15,
+                                        add_css_class: "emojigrid",
+                                    },
+                                    
+                                    // Animals and Nature
+                                    gtk::Label {
+                                        set_label: "Animals and Nature",
+                                        add_css_class: "category",
+                                    },
+                                    
+                                    #[local]
+                                    animals_grid -> gtk::Grid {
+                                        set_orientation: gtk::Orientation::Vertical,
+                                        set_margin_all: 5,
+                                        set_column_spacing: 15,
+                                        set_row_spacing: 15,
+                                    },
+
+                                    // Travel and Places
+                                    gtk::Label {
+                                        set_label: "Travel and Places",
+                                        add_css_class: "category",
+                                    },
+                                    
+                                    #[local]
+                                    travel_grid -> gtk::Grid {
+                                        set_orientation: gtk::Orientation::Vertical,
+                                        set_margin_all: 5,
+                                        set_column_spacing: 15,
+                                        set_row_spacing: 15,
+                                        add_css_class: "emojigrid",
+                                    },
+                                }
                             }
                         } -> {
                             set_name: "emoji_list",
