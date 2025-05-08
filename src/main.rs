@@ -23,6 +23,7 @@ const TRAVEL_PLACES: &str = include_str!("../data/travel_and_places.json");
 pub enum Msg {
     SearchedText(String),
     Clicked(String, String),
+    FocusFood,
     Quit,
 }
 
@@ -35,6 +36,8 @@ struct App {
     entry: gtk::EntryBuffer,
     stack: gtk::Stack,
     search_res: Controller<SearchResults>,
+    // Reference for Scrolling to
+    food_header: gtk::Label,
 }
 
 #[relm4::component]
@@ -136,11 +139,14 @@ impl Component for App {
                                 gtk::Button {
                                     add_css_class: "menubar",
                                     set_label: "🥗",
-                                    set_tooltip_text: Some("Nature and Foods"),
+                                    set_tooltip_text: Some("Food & Drinks"),
+
+                                    connect_clicked => Msg::FocusFood,
                                 },
 
                             },
 
+                            #[name = "scroll_window"]
                             gtk::ScrolledWindow {
                                 set_vexpand: true,
                             
@@ -178,7 +184,8 @@ impl Component for App {
                                     },
                                     
                                     // Food and Drinks
-                                    gtk::Label {
+                                    #[local]
+                                    food_label -> gtk::Label {
                                         set_label: "Food and Drinks",
                                         add_css_class: "category",
                                     },
@@ -190,6 +197,7 @@ impl Component for App {
                                         set_column_spacing: 15,
                                         set_row_spacing: 15,
                                         add_css_class: "emojigrid",
+                                        set_focusable: true,
                                     },
                                     
                                     // Animals and Nature
@@ -253,6 +261,8 @@ impl Component for App {
         let people_grid = gtk::Grid::default();
         let emojis_people = initialize_emoji_grid(PEOPLE_BODY, &people_grid, sender.clone());
 
+        let food_label = gtk::Label::default();
+
         let food_grid = gtk::Grid::default();
         let emojis_food= initialize_emoji_grid(FOOD_DRINK, &food_grid, sender.clone());
 
@@ -269,22 +279,25 @@ impl Component for App {
                 SearchMsg::SearchedText(_) => unreachable!(),
             });
             
-        let mut model = App {
-            _emojis_smiles: emojis_smile,
-            _emojis_food: emojis_food,
-            _emojis_animals: emojis_animals,
-            _emojis_people: emojis_people,
-            _emojis_travel: emojis_travel,
-            entry: gtk::EntryBuffer::default(),
-            stack: gtk::Stack::default(),
-            search_res: search_res,
-        };
-
-        let widgets = view_output!();
-
-        model.stack = widgets.stack.clone();
-
-        ComponentParts { model, widgets }
+            
+            let mut model = App {
+                _emojis_smiles: emojis_smile,
+                _emojis_food: emojis_food,
+                _emojis_animals: emojis_animals,
+                _emojis_people: emojis_people,
+                _emojis_travel: emojis_travel,
+                entry: gtk::EntryBuffer::default(),
+                stack: gtk::Stack::default(),
+                search_res: search_res,
+                
+                food_header: food_label.clone(),
+            };
+            
+            
+            let widgets = view_output!();
+            model.stack = widgets.stack.clone();
+            
+            ComponentParts { model, widgets }
     }
 
     fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>, root: &Self::Root) {
@@ -320,6 +333,10 @@ impl Component for App {
                     relm4::main_application().quit();
                 });
             },
+            Msg::FocusFood => {
+                println!("Let's scroll!");
+            },
+
             Msg::Quit => {
                 relm4::main_application().quit();
             }
