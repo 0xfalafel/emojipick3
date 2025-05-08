@@ -28,9 +28,9 @@ pub enum Msg {
 
 struct App {
     _emojis_smiles: FactoryVecDeque<EmojiButton>,
+    _emojis_people: FactoryVecDeque<EmojiButton>,
     _emojis_food: FactoryVecDeque<EmojiButton>,
     _emojis_animals: FactoryVecDeque<EmojiButton>,
-    _emojis_people: FactoryVecDeque<EmojiButton>,
     _emojis_travel: FactoryVecDeque<EmojiButton>,
     entry: gtk::EntryBuffer,
     stack: gtk::Stack,
@@ -137,6 +137,22 @@ impl Component for App {
                                     set_row_spacing: 15,
                                     add_css_class: "emojigrid",
                                 },
+
+
+                                // People and Body
+                                gtk::Label {
+                                    set_label: "People and Body",
+                                    add_css_class: "category",
+                                },
+                                
+                                #[local]
+                                people_grid -> gtk::Grid {
+                                    set_orientation: gtk::Orientation::Vertical,
+                                    set_margin_all: 5,
+                                    set_column_spacing: 15,
+                                    set_row_spacing: 15,
+                                    add_css_class: "emojigrid",
+                                },
                                 
                                 // Food and Drinks
                                 gtk::Label {
@@ -165,21 +181,6 @@ impl Component for App {
                                     set_margin_all: 5,
                                     set_column_spacing: 15,
                                     set_row_spacing: 15,
-                                },
-
-                                // People and Body
-                                gtk::Label {
-                                    set_label: "People and Body",
-                                    add_css_class: "category",
-                                },
-                                
-                                #[local]
-                                people_grid -> gtk::Grid {
-                                    set_orientation: gtk::Orientation::Vertical,
-                                    set_margin_all: 5,
-                                    set_column_spacing: 15,
-                                    set_row_spacing: 15,
-                                    add_css_class: "emojigrid",
                                 },
 
                                 // Travel and Places
@@ -224,15 +225,15 @@ impl Component for App {
 
         let smile_grid = gtk::Grid::default();
         let emojis_smile= initialize_emoji_grid(SMILE_FACES, &smile_grid, sender.clone());
+        
+        let people_grid = gtk::Grid::default();
+        let emojis_people = initialize_emoji_grid(PEOPLE_BODY, &people_grid, sender.clone());
 
         let food_grid = gtk::Grid::default();
         let emojis_food= initialize_emoji_grid(FOOD_DRINK, &food_grid, sender.clone());
 
         let animals_grid = gtk::Grid::default();
         let emojis_animals= initialize_emoji_grid(ANIMALS_NATURE, &animals_grid, sender.clone());
-
-        let people_grid = gtk::Grid::default();
-        let emojis_people = initialize_emoji_grid(PEOPLE_BODY, &people_grid, sender.clone());
 
         let travel_grid = gtk::Grid::default();
         let emojis_travel = initialize_emoji_grid(TRAVEL_PLACES, &travel_grid, sender.clone());
