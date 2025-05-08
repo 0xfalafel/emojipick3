@@ -342,6 +342,8 @@ fn load_css() {
     gtk::style_context_add_provider_for_display(&display, &provider, priority);
 }
 
+// Based on https://github.com/davidmhewitt/elementary-rust-example/blob/main/src/application.rs#L81
+/// Follow the dark theme setting in elementary OS
 fn follow_dark_theme() {
     if let Some(gtk_settings) = gtk::Settings::default() {
         granite::init();
