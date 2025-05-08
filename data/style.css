@@ -10,6 +10,10 @@
 	font-weight: bold;
 }
 
+.menubar {
+	font-size: 18px;
+}
+
 .emojigrid {
     margin-bottom: 14px;
 }

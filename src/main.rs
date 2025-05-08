@@ -124,13 +124,19 @@ impl Component for App {
 
                             gtk::Box {
                                 add_css_class: relm4::css::LINKED,
+                                set_halign: gtk::Align::Center,
+                                set_margin_bottom: 10,
 
                                 gtk::Button {
-                                    set_label: "Smile"
+                                    add_css_class: "menubar",
+                                    set_label: "😀",
+                                    set_tooltip_text: Some("Smile and Faces"),
                                 },
 
                                 gtk::Button {
-                                    set_label: "Nature"
+                                    add_css_class: "menubar",
+                                    set_label: "🥗",
+                                    set_tooltip_text: Some("Nature and Foods"),
                                 },
 
                             },
