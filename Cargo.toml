@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+granite = { version = "1.1", package = "granite-rs", features = ["v7_2"] }
 relm4 = "0.9.1"
 relm4-components = "0.9.1"
 serde = { version = "1.0.219", features = ["derive"] }

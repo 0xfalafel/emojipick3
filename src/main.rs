@@ -3,6 +3,7 @@ use relm4::gtk::gdk::{Display, Key};
 use relm4::gtk::{gdk, Grid};
 use relm4::prelude::*;
 use relm4::factory::FactoryVecDeque;
+use granite::prelude::*;
 use std::process::Command;
 use std::time::Duration;
 
@@ -341,7 +342,34 @@ fn load_css() {
     gtk::style_context_add_provider_for_display(&display, &provider, priority);
 }
 
+fn follow_dark_theme() {
+    if let Some(gtk_settings) = gtk::Settings::default() {
+        granite::init();
+        if let Some(granite_settings) = granite::Settings::default() {
+            
+            // Use the dark theme, if it's the theme prefered globaly
+            gtk_settings.set_gtk_application_prefer_dark_theme(
+                granite_settings.prefers_color_scheme() == granite::SettingsColorScheme::Dark
+            );
+            
+            // Auto switch theme when the preferences are changed
+            granite_settings.connect_prefers_color_scheme_notify(
+
+                move |granite_settings| {
+                    gtk_settings.set_gtk_application_prefer_dark_theme(
+                        granite_settings.prefers_color_scheme() == granite::SettingsColorScheme::Dark
+                    );
+                }
+            );
+        }
+    }
+}
+
 fn main() {
     let app = RelmApp::new("pro.lasne.emojipick");
+
+    // Set the application to follow the system theme
+    follow_dark_theme();
+
     app.run::<App>(());
 }
